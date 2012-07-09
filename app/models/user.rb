@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
 
   belongs_to  :Role,                      :foreign_key => :role_id
   
+  has_many    :CreatedContactForms,       :foreign_key => :created_by_id,   :inverse_of => :CreatedBy,    :class_name => "ContactForm"
+  has_many    :ModifiedContactForms,      :foreign_key => :modified_by_id,  :inverse_of => :ModifiedBy,   :class_name => "ContactForm"
+  
   has_many    :CreatedContents,           :foreign_key => :created_by_id,   :inverse_of => :CreatedBy,    :class_name => "SiteContent"
   has_many    :ModifiedContents,          :foreign_key => :modified_by_id,  :inverse_of => :ModifiedBy,   :class_name => "SiteContent"
   

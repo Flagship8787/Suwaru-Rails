@@ -11,16 +11,24 @@
 	</ul>
 	<h3>Content Managment</h3>
 	<ul class="toggle">
+		<li class="icn_categories"><%= link_to "Site Contents", admin_site_contents_path %></li>
 		<li class="icn_categories"><%= link_to "Categories", admin_categories_path %></li>
 		<li class="icn_tags"><%= link_to "Tags", admin_tags_path %></li>
 		<li class="icn_tags"><%= link_to "Comments", admin_comments_path %></li>
 		<li class="icn_tags"><%= link_to "Flagged", admin_flags_path %></li>
 	</ul>
+	<h3>Articles</h3>
+	<ul class="toggle">
+		<li class="icn_new_article"><%= link_to "New Article", new_admin_article_path %></li>
+		<li class="icn_edit_article"><%= link_to "All Articles", admin_articles_path %></li>
+	</ul>
+	<!--
 	<h3>Blog</h3>
 	<ul class="toggle">
 		<li class="icn_new_article"><%= link_to "New Post", new_admin_post_path %></li>
 		<li class="icn_edit_article"><%= link_to "All Posts", admin_posts_path %></li>
 	</ul>
+	-->
 	<h3>Projects</h3>
 	<ul class="toggle">
 		<li class="icn_new_article"><%= link_to "New Project", new_admin_project_path %></li>

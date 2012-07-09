@@ -71,8 +71,11 @@ Suwaru::Application.routes.draw do
     resources :categories
     resources :flags
     
+    resources :site_contents
+    
     resources :projects
     resources :posts
+    resources :articles
     resources :comments  
     
     resources :contact_forms

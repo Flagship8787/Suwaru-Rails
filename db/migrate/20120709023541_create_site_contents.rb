@@ -13,6 +13,12 @@ class CreateSiteContents < ActiveRecord::Migration
       
       t.datetime  :Published,         :null => true
 
+      t.boolean   :AllowComments,     :default => true
+      t.boolean   :ApproveComments,   :default => true
+      t.integer   :CommentDepth,      :default => 2
+
+      t.integer   :MaxFlags,          :default => 10
+
       t.timestamps
     end
   end

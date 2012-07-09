@@ -20,7 +20,7 @@
 			<% categories.each do |aCategory| %>
 				<li>
 					<%= link_to aCategory.Name, aCategory %>
-					<%= (aCategory.ContentCategories.empty? ? "(0)" : "(" + aCategory.ContentCategories.size.to_s + ")") %>
+					<%= (aCategory.SiteContents.empty? ? "(0)" : "(" + aCategory.SiteContents.size.to_s + ")") %>
 				</li>
 			<% end %>
 		</ul>

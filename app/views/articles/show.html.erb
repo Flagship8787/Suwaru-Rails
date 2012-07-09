@@ -1,15 +1,40 @@
-<p id="notice"><%= notice %></p>
+<%= render "articles/show/assets/styles" %>
+<%= render "articles/show/assets/scripts" %>
+<div id="article_wrap">
+	<header id="article_header">
+		<div class="article_header_section">
+			<h2 id="article_title" class="left_align"><%= @article.Title %></h2>
+			<span id="article_flag_link" class="right_align">
+				<%= flag_link_for @article %>
+			</span>
+			<br class="clear_both" />
+			<span id="article_info">
+				Posted By 
+				<% if @article.SiteContent.CreatedBy.nil? %>
+					<span style="color:orange ; font-style:italic">Unknown</span>
+				<% else %>
+					<%= link_to @article.SiteContent.CreatedBy.username, @article.CreatedBy %>
+				<% end %>
+				On <%= @article.created_at.to_s(:date_full) %>	
+			</span>
+		</div>
+		<div class="article_header_section">
+			<span id="article_categories" class="left_align">
+				Categories: 
+			</span>
+			<span id="article_tags" class="right_align">
+				<label>Tags: </label>
+				<% tag_links = @article.SiteContent.Tags.collect{ |aTag| link_to(aTag.Name, aTag) } %>
+				<%= raw(tag_links.join(", ")) %>
+			</span>
+			<br class="clear_both" />
+		</div>
+	</header>
+	<section id="article_body_wrap">
+		<%= raw(@article.Body) %>
+	</section>
+	<hr id="divider" />
+	<% @parent = @article %>
+	<%#= render "comments/index/index"  %>
+</div>
 
-<p>
-  <b>Title:</b>
-  <%= @article.Title %>
-</p>
-
-<p>
-  <b>Body:</b>
-  <%= @article.Body %>
-</p>
-
-
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>

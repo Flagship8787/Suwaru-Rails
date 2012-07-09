@@ -58,9 +58,11 @@ ActiveRecord::Schema.define(:version => 20120709023541) do
   end
 
   create_table "contact_forms", :force => true do |t|
+    t.integer  "created_by_id"
+    t.integer  "modified_by_id"
     t.string   "Name"
     t.text     "Description"
-    t.boolean  "AllowGuest",  :default => false
+    t.boolean  "AllowGuest",     :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -128,6 +130,10 @@ ActiveRecord::Schema.define(:version => 20120709023541) do
     t.integer  "modified_by_id"
     t.integer  "published_by_id"
     t.datetime "Published"
+    t.boolean  "AllowComments",   :default => true
+    t.boolean  "ApproveComments", :default => true
+    t.integer  "CommentDepth",    :default => 2
+    t.integer  "MaxFlags",        :default => 10
     t.datetime "created_at"
     t.datetime "updated_at"
   end

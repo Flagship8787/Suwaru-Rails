@@ -1,7 +1,8 @@
 class ContactForm < ActiveRecord::Base
 
-  has_one     :SiteContent,           :foreign_key => :content_id, :inverse_of => :Content, :as => :Content
-
+  belongs_to  :CreatedBy,       :foreign_key => :created_by_id, :class_name => "User"
+  belongs_to  :ModifiedBy,      :foreign_key => :modified_by_id, :class_name => "User"
+  
   has_many    :ContactMessages,       :foreign_key => :contact_form_id
 
   has_many    :ContactFormRecipients, :foreign_key => :contact_form_id, :autosave => true
