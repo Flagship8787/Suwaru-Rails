@@ -1,0 +1,32 @@
+<div id="category_info_wrap">
+	<p>
+	  	<b>Name:</b>
+		<%= @category.Name %>
+	</p>
+	<p>
+	  	<b>Description:</b>
+	  	<%= raw(@category.Description) %>
+	</p>
+</div>
+<div id="category_content_wrap">
+	<% @cContents = @category.Contents %>
+	<h4>Listing <%= @cContents.nil? ? "0" : @cContents.length.to_s %> elements for <%= @category.Name %></h4>
+	<table id="category_content_table">
+		<thead>
+			<tr>
+				<th>Type</th>
+				<th>Posted</th>
+				<th>Options</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @cContents.each do |cContent| %>
+				<tr>
+					<td><%= cContent.class.to_s %></td>
+					<td><%= cContent.created_at.to_s(:date_full) %></td>
+					<td><%= link_to "View", cContent %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

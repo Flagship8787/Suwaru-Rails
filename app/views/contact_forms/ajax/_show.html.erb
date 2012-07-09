@@ -1,0 +1,12 @@
+<%= render "contact_forms/ajax/show/assets/styles"%>
+<%= render "contact_forms/ajax/show/assets/scripts"%>
+<div id="contact_form_wrap">
+	<h3><%= @contact_form.Name %></h3>
+	<div id="contact_form_description">
+		<%= raw(@contact_form.Description) %>
+	</div>
+	<% @contact_message = ContactMessage.new({:ContactForm => @contact_form, :Sender => current_user}) %>
+	<div id="contact_message_form_wrap">
+		<%= render "contact_messages/form" %>
+	</div>
+</div>

@@ -1,0 +1,48 @@
+<script type="text/javascript">
+	$().ready(function(){
+		$("#ajax_contact_form_recipient_form").bind("ajax:beforeSend", function(xhr, settings){
+			indicate_activity($("#contact_form_recipients_wrap"));
+		}).bind("ajax:complete", function(evt, xhr, status){
+			
+		}).bind("ajax:success", function(evt, data, status, xhr){
+			indicate_activity($("#contact_form_recipients_wrap"));
+			$("#ajax_contact_form_recipient_form").parent().replaceWith(data);
+			refresh_ui_elements();
+		}).bind("ajax:error", function(evt, xhr, status, error){
+			indicate_activity($("#contact_form_recipients_wrap"));
+
+			if(xhr.status == 422){
+				$("#ajax_contact_form_recipient_form").parent().replaceWith(xhr.responseText);
+				return;
+			}
+			
+			alert("A " + xhr.status + " status has been returned by the server.  Please submit you expression info again.");
+		});
+		
+		$("#cancel_contact_form_recipient_form").button().click(function(){
+			var recipient_wrap 	= $(this).parent(".actions").parent("form").parent("div");
+			var recipient_id 	= $(this).parent(".actions").parent("form").parent("div").find(".contact_form_recipient_id");
+
+			if(recipient_id == null || recipient_id.length <= 0){
+				recipient_wrap.remove();
+				return;
+			}
+			
+			recipient_id = recipient_id.first().attr("value");
+
+			$.ajax({type: "GET", url:"/admin/contact_form_recipients/" + recipient_id,
+				beforeSend:function(xhr, settings){
+					indicate_activity($("#contact_form_recipients_wrap"));
+				},complete:function(xhr, status){
+
+				},success:function(data, status, xhr){	
+					indicate_activity($("#contact_form_recipients_wrap"));
+					recipient_wrap.replaceWith(data);
+				},error:function(xhr, settings, error){	
+					indicate_activity($("#contact_form_recipients_wrap"));
+					alert("Failed to find cancel the edit recipient action.");
+				}
+			});
+		});
+	});
+</script>

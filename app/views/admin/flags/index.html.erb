@@ -1,0 +1,53 @@
+<article class="module width_full">
+	<header>
+		<h3>Listing <%= @flags.nil? ? "0" : @flags.length.to_s %> flags</h3>
+	</header>
+	<% if @flags.nil? || @flags.length <= 0 %>
+		<div class="module_content">
+			<p id="no_flags">
+				Nothing's been flagged.  Hooray!
+			</p>
+		</div>
+	<% else %>
+		<div>
+			<table id="admin_flags_table" cellspacing="0" class="tablesorter">
+				<thead>
+					<tr>
+						<th>Flagged</th>
+						<th>Reviewed?</th>
+						<th>Removed?</th>
+						<th>Client IP</th>
+						<th>Options</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @flags.each do |aFlag| %>
+						<tr>
+							<td><%= link_to aFlag.Flagged.class.to_s, aFlag.Flagged %></td>
+							<td>
+								<% if aFlag.ReviewedAt.nil? %>
+									<span style="color:orange ; font-style: italic">Never</span>
+								<% else %>
+									<span style="color:green"><%= aFlag.ReviewedAt.to_s(:date_time_12_fulle) %></span>
+								<% end %>
+							</td>
+							<td>
+								<% if aFlag.RemovedAt.nil? %>
+									<span style="color:orange ; font-style: italic">Never</span>
+								<% else %>
+									<span style="color:green"><%= aFlag.RemovedAt.to_s(:date_time_12_fulle) %></span>
+								<% end %>
+							</td>
+							<td>
+								<%= aFlag.FlaggedByIp %>
+							</td>
+							<td>
+								<%= link_to "Review", admin_flag_path() %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	<% end %>
+</article>

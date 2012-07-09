@@ -1,0 +1,31 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#new_comment_button").button().click(function(){
+			if(isBusy){
+				return;
+			}
+
+			$("#new_comment_form").remove();
+			
+			var requestJSON = {
+				"pid": $("#parent_id").attr("value"),
+				"ptp": $("#parent_type").attr("value")
+			}
+			
+			$.ajax({data:requestJSON, type:"POST", url:'<%= url_for :controller => "comments", :action => "new" %>',
+				beforeSend:function(xhr, settings){
+					$("#status_indicator").text("Fetching comment form");
+					indicate_activity($("#comment_options"));
+				},complete:function(xhr, status){
+					$("#status_indicator").text("Idle...")
+				},success:function(data, status, xhr){	
+					indicate_activity($("#comment_options"));
+					$("#comments_list").prepend(data);
+				},error:function(xhr, settings, error){	
+					indicate_activity($("#comment_options"));
+					alert("Failed to fetch new comment form");
+				}
+			});
+		});
+	});
+</script>

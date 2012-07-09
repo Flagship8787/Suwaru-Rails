@@ -1,0 +1,38 @@
+<div id="user_info_wrap">
+	<section id="user_info_header">
+		<h2 class="left_align">Account Info</h2>
+		<span class="right_align">
+			[<%= link_to "Edit", edit_admin_user_path(@user) %>]
+			[<%= link_to "Delete", "#" %>]
+		</span>
+		<br class="clear_both" />
+	</section>
+	<section id="user_info">
+		<div class="info_wrap">
+			<label>User Name:</label><br />
+			<%= @user.username %>
+		</div>
+		<div class="info_wrap">
+			<label>Email:</label><br />
+			<%= @user.email %>
+		</div>
+		<div class="info_wrap">
+			<label>User Name:</label><br />
+			<%= @user.username %>
+		</div>
+		<div class="info_wrap">
+			<label>User Since:</label><br />
+			<%= @user.created_at.to_s(:date_time_12_full) %>
+		</div>
+		<div class="info_wrap">
+			<label>Signed in at:</label><br />
+			<%= @user.current_sign_in_at.to_s(:date_time_12_full) %>
+			( from <%= @user.current_sign_in_ip %> )
+		</div>
+		<div class="info_wrap">
+			<label>Last signed in at:</label><br />
+			<%= @user.last_sign_in_at.to_s(:date_time_12_full) %>
+			( from <%= @user.last_sign_in_ip %> )
+		</div>
+	</section>
+</div>

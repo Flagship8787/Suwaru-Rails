@@ -1,0 +1,16 @@
+<%= javascript_include_tag "/frameworks/jQueryUI/extensions/jquerytools/src/toolbox/toolbox.expose.js" %>
+<%= javascript_include_tag "/frameworks/jQueryUI/extensions/jquerytools/src/overlay/overlay.js" %>
+<%= modal_overlay do %>
+	<%= render :partial => "include/overlay/assets/scripts" %>
+	<%= render :partial => "include/overlay/assets/styles" %>
+	<div id="expression_overlay_content">
+		<div id="modal_overlay_header">
+			<span id="overlay_status_indicator" class="left_align">Idle...</span>
+			<button id="exit_overlay_button" class="right_align">Exit</button>
+			<br class="clear_both" />
+		</div>
+		<div id="modal_overlay_content">
+			<%= yield %>
+		</div>
+	</div>
+<% end %>

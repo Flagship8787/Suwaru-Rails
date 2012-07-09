@@ -1,0 +1,40 @@
+<article id="flags_module" class="module width_quarter">
+	<header><h3>Flags</h3></header>
+	<% flags = Flag.NeverRemoved %>
+	<% if flags.nil? || flags.length <= 0 %>
+		<div class="module_content">
+			<p id="no_flags">
+				There are no flags at the moment.  Yay!
+			</p>
+		</div>
+	<% else %>
+		<div>
+			<table id="flags_table" class="tablesorter" cellspacing="0">
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Flagged By</th>
+						<th>Options</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% flags.each do |aFlag| %>
+						<tr>
+							<td><%= aFlag.Flagged.type.to_s %></td>
+							<td>
+								<% if aFlag.FlaggedBy.nil? %>
+									<%= aFlag.FlaggedByIP %>
+								<% else %>
+									<%= link_to aFlag.FlaggedBy.username, admin_user_path(aFlag.FlaggedBy) %>
+								<% end %>
+							</td>
+							<td>
+								<%= link_to "View", admin_flag_path(aFlag) %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	<% end %>
+</article>

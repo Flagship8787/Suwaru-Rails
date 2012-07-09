@@ -1,0 +1,55 @@
+<script type="text/javascript">
+
+	var gaid = <%= @github_auth.id.to_s %>;
+	
+	$().ready(function(){
+		$(".github_repo_options").buttonset();
+		$("#sync_all_github_repos").button();
+		
+		$("#sync_all_github_repos").bind("click", sync_all_repos_clicked);
+		$(".sync_repo").bind("click", sync_repo_clicked);
+	});
+	
+	var sync_repo_clicked = function(){
+		
+		var repo_wrap 	= $(this).parent(".github_repo_options").parent(".github_repo_wrap");
+		
+		var repo_name 	= repo_wrap.find(".left_align > .github_repo_name").first().text();
+		var repo_id 	= repo_wrap.find(".github_repo_id").first().attr("value");
+		
+		if(confirm("Sync " + repo_name + " for <%= @github_auth.User.username %>?")){
+			
+			$.ajax({type: "GET", url: "/github_auths/" + gaid + "/sync/" + repo_id,
+				beforeSend:function(xhr, settings){
+					//indicate_activity($("#show_github_auth_wrap"));
+				},complete:function(xhr, status){
+					
+				},success:function(data, status, xhr){	
+					//indicate_activity($("#show_github_auth_wrap").first());
+					$("#show_github_auth_wrap").replaceWith(data);
+				},error:function(xhr, settings, error){	
+					//indicate_activity($("#show_github_auth_wrap"));
+					alert("Failed to sync <%= @github_auth.User.username %>'s " + repo_name + " with Github.");
+				}
+			});
+		}
+	}
+	
+	var sync_all_repos_clicked = function(){
+		if(confirm("Sync all repos for <%= @github_auth.User.username %>?")){
+			$.ajax({type: "GET", url: "/github_auths/" + gaid + "/sync",
+				beforeSend:function(xhr, settings){
+					//indicate_activity($("#show_github_auth_wrap"));
+				},complete:function(xhr, status){
+					
+				},success:function(data, status, xhr){	
+					//indicate_activity($("#show_github_auth_wrap"));
+					$("#show_github_auth_wrap").replaceWith(data);
+				},error:function(xhr, settings, error){	
+					//indicate_activity($("#show_github_auth_wrap"));
+					alert("Failed to sync <%= @github_auth.User.username %>'s repos with Github.");
+				}
+			});
+		}
+	}
+</script>

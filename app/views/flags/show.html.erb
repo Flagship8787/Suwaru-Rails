@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Content:</b>
+  <%= @flag.content_id %>
+</p>
+
+<p>
+  <b>Content type:</b>
+  <%= @flag.content_type %>
+</p>
+
+<p>
+  <b>Flagged by:</b>
+  <%= @flag.flagged_by_id %>
+</p>
+
+<p>
+  <b>Flagged by ip:</b>
+  <%= @flag.flagged_by_ip %>
+</p>
+
+<p>
+  <b>Removedat:</b>
+  <%= @flag.RemovedAt %>
+</p>
+
+<p>
+  <b>Removed by:</b>
+  <%= @flag.removed_by_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_flag_path(@flag) %> |
+<%= link_to 'Back', flags_path %>

@@ -1,0 +1,24 @@
+<%= render "admin/contact_forms/show/assets/styles" %>
+<%= render "admin/contact_forms/show/assets/scripts" %>
+<article class="module width_full">
+	<header>
+		<header>
+			<h3 class="tabs_involved">
+				<%= @contact_form.Name %> 
+				<%= link_to "Edit", edit_admin_contact_form_path(@contact_form), :id => "edit_contact_form" %>
+			</h3>
+			<ul class="tabs">
+				<li class="active" style=""><a href="#tab1">Info</a></li>
+				<li><a href="#tab2">Messages</a></li>
+			</ul>
+		</header>
+	</header>
+	<div class="tab_container">
+		<div id="tab1" class="tab_content module_content" style="display: block; ">
+			<%= render "admin/contact_forms/show/tabs/form_info" %>
+		</div><!-- end of #tab1 -->
+		<div id="tab2" class="tab_content module_content" style="display: none; ">
+			<%= render "admin/contact_forms/show/tabs/messages" %>
+		</div><!-- end of #tab2 -->	
+	</div><!-- end of .tab_container -->
+</article>

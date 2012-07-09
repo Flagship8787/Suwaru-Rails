@@ -1,0 +1,30 @@
+<% if user_signed_in? %>
+	<span id="account_info_wrap">
+		<% if !current_user.GithubAuth.nil? %>
+			<a href="http://github.com" class="auth_icon">
+				<%= image_tag "/images/icons/github/github_white_black_cat_32.png" %>
+			</a>
+		<% end %>
+		<% if !current_user.TwitterAuth.nil? %>
+			<a href="http://twitter.com" class="auth_icon">
+				<%= image_tag "/images/icons/twitter/twitter_32.png" %>
+			</a>
+		<% end %>
+		<% if !current_user.FacebookAuth.nil? %>
+			<a href="http://facebook.com" class="auth_icon">
+				<%= image_tag "/images/icons/facebook/facebook_32.png" %>
+			</a>
+		<% end %>
+		<%= link_to current_user.username, admin_root_path %>
+	</span>
+	<span id="logout_wrap">
+		<%= link_to "Logout", destroy_user_session_path, :confirm => 'Are you sure?', :method => :delete %>
+	</span>
+<% else %>
+	<span id="login_wrap">
+		<%= link_to "Log In", new_user_session_path %>
+	</span>
+	<span id="register_wrap">
+		<%= link_to "Sign Up", new_user_registration_path %>
+	</span>
+<% end %>

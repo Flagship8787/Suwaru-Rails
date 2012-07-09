@@ -1,0 +1,24 @@
+<style type="text/css">
+	#authenticate_github_wrap{
+		padding: 16px 18px 16px 18px;
+	}
+	#authenticate_github_wrap{
+		text-indent: 18px;
+	}
+	#authenticate_github_wrap > p{
+		text-align: center;
+	}
+	#github_logo{
+		margin: 0px 18px 18px 0px;
+		float: left;
+	}
+</style>
+<div id="authenticate_github_wrap">
+	<%= image_tag "/frameworks/github/logos/github_logo_social_coding_outlined.png", :id => "github_logo" %>
+	<p id="github_auth_explanation">
+		The <i>Suwaru</i> framework allows our users to display their public code to each other using the popular "Social Coding" website, <a href="http://github.com">Github</a>
+	</p>
+	<p style="text-align: center">
+		<%= link_to "Authenticate Now", "/auth/github" %>
+	</p>
+</div>

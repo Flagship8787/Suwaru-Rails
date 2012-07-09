@@ -1,0 +1,36 @@
+<article id="authentications_module" class="module width_3_quarter">
+	<header>
+		<h3 class="tabs_involved">Account Manager</h3>
+		<ul class="tabs">
+			<li class="active"><a href="#authTab1">Facebook</a></li>
+			<li><a href="#authTab2">Twitter</a></li>
+			<li><a href="#authTab3">Github</a></li>
+		</ul>
+	</header>
+	<div class="tab_container">
+		<div id="authTab1" class="tab_content module_content" style="display: block; ">
+			<% if current_user.FacebookAuth.nil? %>
+				<%= render "admin/authentications/facebook/authenticate" %>
+			<% else %>
+				<% @facebook_auth = current_user.FacebookAuth %>
+				<%= render "admin/authentications/facebook/show" %>
+			<% end %>
+		</div><!-- end of #authTab1 -->
+		<div id="authTab2" class="tab_content module_content" style="display: none; ">
+			<% if current_user.TwitterAuth.nil? %>
+				<%= render "admin/authentications/twitter/authenticate" %>
+			<% else %>
+				<% @twitter_auth = current_user.TwitterAuth %>
+				<%= render "admin/authentications/twitter/show" %>
+			<% end %>
+		</div><!-- end of #authTab2 -->	
+		<div id="authTab3" class="tab_content module_content" style="display: none; ">
+			<% if current_user.GithubAuth.nil? %>
+				<%= render "admin/authentications/github/authenticate" %>
+			<% else %>
+				<% @github_auth = current_user.GithubAuth %>
+				<%= render "admin/authentications/github/show" %>
+			<% end %>
+		</div><!-- end of #authTab3 -->	
+	</div><!-- end of .tab_container -->
+</article>

@@ -1,0 +1,26 @@
+<% @projects = Project.page(params[:projects_page]).per(3) %>
+<section id="projects_list_column" class="right_align">
+	<h3 id="projects_list_banner">Latest Projects</h3>
+	<div id="projects_list">
+		<% @projects.each do |project| %>
+			<div class="project_wrap">
+				<h4><%= link_to (project.Name.length > 75 ? project.Name[0..72] + "..." : project.Name), project %></h4>
+				<span class="project_info">
+				</span>
+				<article class="project_preview">
+					<% project_desc = strip_tags(project.Description) %>
+					<p>
+						<% if project_desc.length > 240 %>
+							<%= project_desc[0..237] + "..." %>
+						<% else %>
+							<%= project_desc %>
+						<% end %>
+					</p>
+				</article>
+			</div>
+		<% end %>
+	</div>
+	<div id="projects_pager_wrap">
+		<%= paginate @projects, :param_name => :projects_page %>
+	</div>
+</section>

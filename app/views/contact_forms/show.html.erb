@@ -1,0 +1,79 @@
+<!--
+	<%= render "contact_forms/ajax/show" %>
+-->
+<section id="normalheader" class="header2">
+
+</section>
+<h2><%= @contact_form.Name %></h2>
+<article class="post">
+	<span id="contact_form_description">
+		<%= raw(@contact_form.Description) %>
+	</span>
+	<%= render "contact_messages/form/assets/styles" %>
+	<%= render "contact_messages/form/assets/scripts" %>
+	<%= form_for(@contact_message, :html => {:class => "form"}) do |f| %>
+		<% if @contact_message.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@contact_message.errors.count, "error") %> prohibited this contact_message from being saved:</h2>
+				<ul>
+	      			<% @contact_message.errors.full_messages.each do |msg| %>
+	        			<li><%= msg %></li>
+	      			<% end %>
+	      		</ul>
+	    	</div>
+	  	<% end %>
+	  	<%= f.hidden_field :contact_form_id %>
+	  	<div class="field">
+	  		<p class="textfield">
+	    		<%= f.text_field :Subject %>
+	    		<label for="contact_message_Subject">
+	    			<small>Subject</small>
+	    		</label>
+	    	</p>
+	  	</div>
+	  	<div class="field">
+	  		<p class="text-area">
+	    		<%= f.text_area :Body %>
+	    	</p>
+	  	</div>
+	  	<div class="actions">
+	    	<%= f.submit %>
+	  	</div>
+	<% end %>
+	<div class="clear"></div>
+</article>
+
+
+<!--
+	<form action="#" method="post" class="form">
+		<p class="textfield">
+			<input name="author" id="author" value="" size="22" tabindex="1" type="text">
+			<label for="author">
+				<small>Name (required)</small>
+			</label>
+		</p>
+		<p class="textfield">
+	       	<input name="email" id="email" value="" size="22" tabindex="2" type="text">
+	        <label for="email">
+				<small>Mail (will not be published) required)</small>
+			</label>
+	   	</p>
+	   	<p class="textfield">
+			<input name="url" id="url" value="" size="22" tabindex="3" type="text">
+			<label for="url">
+				<small>Website</small>
+			</label>
+	   	</p>
+	   	<p>
+	       	<small><strong>XHTML:</strong> You can use these tags:....</small>
+	   	</p>
+	   	<p class="text-area">
+			<textarea name="comment" id="comment" cols="50" rows="10" tabindex="4"></textarea>
+	   	</p>
+	   	<p>
+	       <input name="submit" id="submit" tabindex="5" type="image" src="/frameworks/silverblog/images/submit.png">
+	       <input name="comment_post_ID" value="1" type="hidden">
+	   	</p>
+	   	<div class="clear"></div>
+	</form>  
+-->

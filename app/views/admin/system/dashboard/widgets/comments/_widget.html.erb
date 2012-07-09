@@ -1,0 +1,53 @@
+<article id="comments_module" class="module width_half">
+	<header>
+		<h3 class="tabs_involved">Comments</h3>
+		<ul class="tabs">
+			<li class="active"><a href="#commentTab1">Unapproved</a></li>
+			<li><a href="#commentTab2">All</a></li>
+		</ul>
+	</header>
+	<div class="tab_container">
+		<div id="commentTab1" class="tab_content module_content" style="display: block; ">
+			<% comments = Comment.Unapproved %>
+			<% if comments.nil? || comments.length <= 0 %>
+				<div class="module_content">
+					<p id="no_flags">
+						There are no unapproved comments at the moment.  Yay!
+					</p>
+				</div>
+			<% else %>
+				<div>
+					<table id="comments_table" class="tablesorter" cellspacing="0">
+						<thead>
+							<tr>
+								<th>Parent</th>
+								<th>Posted By</th>
+								<th>Options</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% comments.each do |aComment| %>
+								<tr>
+									<td><%= aComment.Parent.type.to_s %></td>
+									<td>
+										<% if aComment.CreatedBy.nil? %>
+											<span style="color:orange ; font-style: italic">Anonymous</span>
+										<% else %>
+											<%= link_to aComment.CreatedBy.username, admin_user_path(aComment.CreatedBy) %>
+										<% end %>
+									</td>
+									<td>
+										<%= link_to "View", admin_flag_path(aFlag) %>
+									</td>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
+			<% end %>
+		</div><!-- end of #commentTab1 -->
+		<div id="commentTab2" class="tab_content module_content" style="display: none; ">
+			<h2>All Comments</h2>
+		</div><!-- end of #commentTab2 -->
+	</div><!-- end of .tab_container -->
+</article>

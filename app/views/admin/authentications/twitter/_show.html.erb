@@ -1,0 +1,5 @@
+<div id="twitter_authentication_wrap">
+	<%= image_tag @twitter_auth.AvatarURL, :id => "twitter_avatar_image", :class => "left_align" %>
+	<h3><%= @twitter_auth.AccountName %></h3>
+	<%= link_to "View Profile", @twitter_auth.ProfileURL, :id => "twitter_profile_link" %>
+</div>

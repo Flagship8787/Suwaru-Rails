@@ -1,0 +1,32 @@
+<article class="module width_full">
+	<header><h3><%= @contact_forms.nil? ? "0" : @contact_forms.length.to_s %> Contact Form(s)</h3></header>
+	<div>
+		<table class="tablesorter" cellspacing="0">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th># of Recipients</th>
+					<th>Options</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @contact_forms.each do |contact_form| %>
+					<tr>
+						<td><%= contact_form.Name %></td>
+						<td>
+							<% if contact_form.Recipients.empty? %>
+								<label style="color:orange">No Recipients</label>
+							<% else %>
+								<%= contact_form.Recipients.length.to_s %>
+							<% end %>
+						</td>
+						<td>
+							<%= link_to "View", admin_contact_form_path(contact_form) %>
+							<%= link_to "Edit", edit_admin_contact_form_path(contact_form) %>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</article>

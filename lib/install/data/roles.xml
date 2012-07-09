@@ -1,0 +1,11 @@
+<roles-list>
+	<role name="Web Master">
+		This is an honored title, saved only for those who are masters of the web.
+	</role>
+	<role name="Administrator">
+		This is a site admin.  These users have powers beyond your wildest dreams (although they still have far to go).
+	</role>
+	<role name="Visitor">
+		This is a visitor.  As a guest they are welcomed to our happy home.
+	</role>
+</roles-list>

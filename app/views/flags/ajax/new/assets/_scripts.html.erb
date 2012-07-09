@@ -1,0 +1,29 @@
+<script type="text/javascript">
+	$().ready(function(){
+		$("#ajax_flag_form").bind("ajax:beforeSend", function(xhr, settings){
+			indicate_overlay_activity(true);
+		}).bind("ajax:complete", function(evt, xhr, status){
+			
+		}).bind("ajax:success", function(evt, data, status, xhr){
+			indicate_overlay_activity(false);
+			$("#modal_overlay").overlay().close();
+			
+			var ftype 	= $("#flag_flagged_type").attr("value");
+			var fid 	= $("#flag_flagged_id").attr("value");
+			
+			$("#flag_" + ftype + "_" + fid + "_link").replaceWith($('<span class="flagged">' + ftype + ' Flagged</span>'));
+			
+			alert(data);
+		}).bind("ajax:error", function(evt, xhr, status, error){
+			indicate_overlay_activity(false);
+
+			if(xhr.status == 422){
+				$("#new_flag_wrap").replaceWith($(xhr.responseText)).effect("highlight");
+				
+				return;
+			}
+			
+			alert("A " + xhr.status + " status has been returned by the server.  Please submit you expression info again.");
+		});
+	});
+</script>

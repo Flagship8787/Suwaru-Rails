@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  created_by_id: 1
+  modified_by_id: 1
+  Name: MyString
+  Description: MyText
+  Recipients: MyText
+
+two:
+  created_by_id: 1
+  modified_by_id: 1
+  Name: MyString
+  Description: MyText
+  Recipients: MyText

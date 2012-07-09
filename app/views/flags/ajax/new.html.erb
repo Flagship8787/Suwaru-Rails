@@ -1,0 +1,32 @@
+<section id="new_flag_wrap" class="flag_form_wrapper">
+	<h1>Flag Content</h1>
+	<div id="new_flag_form_wrap">
+		<%= render :partial => "flags/ajax/new/assets/styles" %>
+		<%= render :partial => "flags/ajax/new/assets/scripts" %>
+		<%= form_for(@flag, :remote => true, :html => {:id => "ajax_flag_form"}) do |f| %>
+		  	<% if @flag.errors.any? %>
+		    	<div id="error_explanation">
+		      		<h2><%= pluralize(@flag.errors.count, "error") %> prohibited this flag from being saved:</h2>
+		      		<ul>
+		      			<% @flag.errors.full_messages.each do |msg| %>
+		        			<li><%= msg %></li>
+		      			<% end %>
+		      		</ul>
+		    	</div>
+		  	<% end %>
+			<%= f.hidden_field :flagged_id %>
+			<%= f.hidden_field :flagged_type %>
+			<%= f.hidden_field :flagged_by_id %>
+			<%= f.hidden_field :FlaggedByIP %>
+		  	<div class="field">
+		    	<p id="flag_comment_prompt">
+					For the sake of expediting the content removal process we'd ask for you to please leave a slight comment as to the reason for creating this flag.  Nothing big, just a brief note to point our WebMasters in the right direction.
+				</p>
+				<%= f.text_area :Comment %>
+		  	</div>
+		  	<div class="actions">
+		    	<%= f.submit %>
+		  	</div>
+		<% end %>
+	</div>
+</section>

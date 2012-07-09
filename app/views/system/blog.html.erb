@@ -1,0 +1,39 @@
+<section id="blog_section">
+	<% @posts.each do |post| %>
+		<article class="post">
+			<header>
+				<h3><%= post.Title %></h3>
+				<p class="postinfo">
+					Published on <time><%= post.updated_at.to_s(:date_medium) %></time> by <span class="author"><%= link_to post.CreatedBy.username, post.CreatedBy %></span> in 
+				</p>
+			</header>
+			<p class="post_content">
+				<% stripped = strip_tags(post.Body) %>
+    			<% if !stripped.nil? && stripped.length >= 350 %>
+    				<%= stripped[0..350] + "..." %>
+    			<% else %>
+    				<%= stripped %>
+    			<% end %>
+			</p>
+			<footer>
+				<span class="left_align">
+					Categories: <% categories = post.ContentCategories.collect{ |cCategory| link_to(cCategory.Category.Name, cCategory.Category)  } %>
+					<%= raw(categories.join(", ")) %>
+				</span>
+				<span class="right_align">
+					<%= link_to "Read Full Post", post %>
+				</span>
+				<br class="clear_both" />
+			</footer>
+		</article>
+	<% end %>
+	<div id="blog_posts_pager">
+		<%= paginate @posts, :param_name => :blog_page %>	
+	</div>
+	<!--
+	<div class="wp-pagenavi">
+		<span class="current">1</span><a href="/page/2/" title="2">2</a><a href="/page/3/" title="3">3</a><a href="/page/4/" title="4">4</a><a href="/page/5/" title="5">5</a><a href="/page/6/" title="6">6</a><a href="/page/7/" title="7">7</a><a href="/page/8/" title="8">8</a><a href="/page/2/">Next &raquo;</a><span class="extend">...</span><a href="/page/27/" title="Last &raquo;">Last &raquo;</a>
+	</div>
+	-->
+	<div class="clear"></div>
+</section>

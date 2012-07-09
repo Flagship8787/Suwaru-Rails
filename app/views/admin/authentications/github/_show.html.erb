@@ -1,0 +1,41 @@
+<section id="show_github_auth_wrap">
+	<%= render "admin/authentications/github/show/assets/styles" %>
+	<%= render "admin/authentications/github/show/assets/scripts" %>
+	<article id="github_auth_info" class="left_align">
+		<h4><%= @github_auth.AccountNickname %></h4>
+		<%= link_to "View Profile", @github_auth.ProfileURL %>
+		<%= image_tag @github_auth.AvatarURL, :class => "left_align", :id => "github_avatar_img" %>
+	</article>
+	<article id="github_repos_wrap" class="right_align">
+		<% @github = Github.new({:oauth_token => @github_auth.Token}) %>
+		<div id="github_repos_header" class="ui-widget-header">
+			<h3 id="github_repos_banner" class="left_align">
+				Listing <%= @github.repos.repos.nil? ? "0" : @github.repos.repos.length.to_s %> Repositories
+			</h3>
+			<button id="sync_all_github_repos" class="right_align">Sync All</button>
+			<br class="clear_both" />
+		</div>
+		<div id="github_repos_list">
+			<% @github.repos.list_repos do |aRepo| %>
+				<div class="github_repo_wrap">
+					<%= hidden_field_tag "repo_" + aRepo.id.to_s + "_id", aRepo.id.to_s, :class => "github_repo_id" %>
+					<span class="left_align">
+						<label class="github_repo_name"><%=  aRepo.name %></label>
+						<% if @github_auth.SyncedRepo?(aRepo.id) %>
+							<% repo_project = @github_auth.Projects.find_by_GithubId(aRepo.id) %>
+							<span class="repo_synced sync_status">Last Synced: <%= repo_project.GithubSynced.to_s(:date_time_12_full) %></span>
+						<% else %>
+							<span class="never_synced sync_status">Never Synced</span>
+						<% end %>
+					</span>
+					<span class="github_repo_options right_align">
+						<button class="repo_info">Info</button>
+						<button class="sync_repo">Sync</button>
+					</span>
+					<br class="clear_both" />
+				</div>
+			<% end %>
+		</div>
+	</article>
+	<br class="clear_both" />
+</section>

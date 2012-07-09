@@ -1,0 +1,30 @@
+<div id="contact_form_info">
+	<%= hidden_field_tag "contact_form_id", @contact_form.id %>
+	<div id="contact_form_description">
+		<%= raw(@contact_form.Description) %>
+	</div>
+	<div id="contact_form_recipients_wrap">
+		<div id="contact_form_recipients_options" class="ui-corner-tr ui-corner-tl ui-widget-header">
+			<span id="recipients_count" class="left_align">
+				<% if @contact_form.ContactFormRecipients.empty? %>
+					0 Recipients
+				<% else %>
+					<%= @contact_form.ContactFormRecipients.size.to_s %> Recipients
+				<% end %>
+			</span>
+			<button id="add_contact_form_recipient" class="right_align">+</button>
+			<br class="clear_both" />
+		</div>
+		<div id="contact_form_recipients_list" class="ui-corner-br ui-corner-bl">
+			<div id="no_contact_form_recipients">
+				<h3>This Contact form doesn't have a recipients (yet).  Click "+" to add one.</h3>
+			</div>
+			<% if !@contact_form.Recipients.empty? && @contact_form.Recipients.size > 0 %>
+				<% @contact_form.ContactFormRecipients.each do |aContactRecipient| %>
+					<% @contact_form_recipient = aContactRecipient %>
+					<%= render "admin/contact_form_recipients/show" %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>

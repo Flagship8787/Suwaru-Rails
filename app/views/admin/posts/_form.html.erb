@@ -1,0 +1,36 @@
+<%= render "admin/posts/form/assets/styles" %>
+<%= render "admin/posts/form/assets/scripts" %>
+<%= form_for(@post, :url => (@post.id.nil? ? admin_posts_path : admin_post_path(@post))) do |f| %>
+	<% if @post.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+			<ul>
+				<% @post.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+  	<div class="field">
+    	<%= f.label :Title %><br />
+    	<%= f.text_field :Title %>
+  	</div>
+	<div class="wrapper">
+		<div id="post_category_id_wrap" class="field left_align">
+			<%= f.label :Category %><br />
+			<%= f.select :category_id, Category.all.collect{ |aCategory| [aCategory.Name, aCategory.id] } %>
+		</div>
+		<div id="post_tag_names_wrap" class="field right_align">
+	    	<%= f.label :tag_names %><br />
+	    	<%= f.text_field :tag_names %>
+	  	</div>
+		<br class="clear_both" />
+	</div>
+	<hr id="form_info_divider" />
+	<div class="field">
+		<%= f.text_area :Body %>
+	</div>
+  	<div class="actions">
+    	<%= f.submit %>
+  	</div>
+<% end %>

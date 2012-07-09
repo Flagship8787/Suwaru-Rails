@@ -1,0 +1,48 @@
+<style type="text/css">
+	#workshop_projects_list > .workshop_project{
+		padding: 6px 8px 6px 8px;
+		border: 1px solid gray;
+		margin-bottom: 12px;
+	}
+	#workshop_projects_list > .workshop_project:last-child{
+		margin-bottom: 0px;
+	}
+	
+	.workshop_project > header{
+		padding-bottom: 6px;
+		border-bottom: 1px dotted lightgray;
+	}
+	.workshop_project > header > .right_align{
+		margin-top: 4px;
+	}
+	.project_banner{
+		margin-top: 0px!important;
+		margin-bottom: 0px!important;
+	}
+</style>
+<div id="workshop_projects_list">
+	<% @projects.each do |project| %>
+		<div class="workshop_project">
+			<header>
+				<h3 class="project_banner left_align"><%= link_to project.Name, project %></h3>
+				<span class="right_align">
+					Last updated <%= project.updated_at.to_s(:date_time_12_full) %>
+				</span>
+				<br class="clear_both" />
+			</header>
+			<article class="project_description">
+				<p>
+					<% project_desc = strip_tags(project.Description) %>
+					<% if project_desc.length > 350 %>
+						<%= project_desc[0..347] + "..." %>
+					<% else %>
+						<%= project_desc %>
+					<% end %>
+				</p>
+			</article>
+		</div>
+	<% end %>
+</div>
+<div id="workshop_list_pager">
+	<%= paginate @projects, :param_name => :workshop_page %>
+</div>

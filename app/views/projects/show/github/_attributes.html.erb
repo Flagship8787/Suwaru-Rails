@@ -1,0 +1,26 @@
+<section id="github_attributes_wrap">
+	<%= image_tag @project.GithubAttributes.owner.avatar_url, :class => "left_align", :id => "repo_owner_avater" %>
+	<article id="github_attributes" class="right_align">
+		<h4>Github repository owned by <%= link_to @project.GithubAttributes.owner.login, @project.GithubAttributes.owner.url %></h4>
+		<label>Resource Links:</label>
+		<ul id="github_attributes_list">
+			<li>
+				<label>Page URL:</label>
+				<%= link_to @project.GithubAttributes.url, @project.GithubAttributes.url, :class => "right_align" %>
+			</li>
+			<li>
+				<label>SSH URL:</label>
+				<%= link_to @project.GithubAttributes.ssh_url, @project.GithubAttributes.ssh_url, :class => "right_align" %>
+			</li>
+			<li>
+				<label>Git URL:</label>
+				<%= link_to @project.GithubAttributes.git_url, @project.GithubAttributes.git_url, :class => "right_align" %>
+			</li>
+			<li>
+				<label>Clone URL:</label>
+				<%= link_to @project.GithubAttributes.clone_url, @project.GithubAttributes.clone_url, :class => "right_align" %>
+			</li>
+		</ul>
+	</article>
+	<br class="clear_both" />
+</section>

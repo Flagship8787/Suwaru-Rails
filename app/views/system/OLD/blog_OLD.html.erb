@@ -1,0 +1,54 @@
+<style type="text/css">
+	#blog_posts_list{
+		padding: 0px 8px 0px 8px;
+	}
+	
+	#blog_posts_list > .blog_post_wrap{
+		margin-top: 8px;
+		padding: 8px 6px 8px 6px;
+		border: 1px solid gray;
+		background-color: white
+	}
+
+	#blog_posts_pager{
+		text-align: center;
+		background-color:lightgray;
+		border: 1px solid gray;
+		margin: 8px 0px 8px 0px;
+		
+	}
+</style>
+<div id="blog_posts_list">
+	<% @posts.each do |post| %>
+		<div class="blog_post_wrap">
+			<div class="blog_post_header">
+				<h3><%= link_to post.Title, post %></h3>
+				Posted in categories: 
+				<% categories = post.ContentCategories.collect{ |cCategory| link_to(cCategory.Category.Name, cCategory.Category)  } %>
+				<%= raw(categories.join(", ")) %>
+			</div>
+			<div class="blog_post_preview">
+				<p>
+					<% stripped = strip_tags(post.Body) %>
+	    			<% if !stripped.nil? && stripped.length >= 350 %>
+	    				<%= stripped[0..350] + "..." %>
+	    			<% else %>
+	    				<%= stripped %>
+	    			<% end %>
+    			</p>
+			</div>
+			<div class="blog_post_footer">
+				<span class="left_align">
+					Posted on <%= post.created_at.to_s(:date_time_12_full) %> by <%= link_to post.CreatedBy.username, post.CreatedBy %>
+				</span>
+				<span class="right_align">
+					<%= post.Comments.size.to_s %> Comments
+				</span>
+				<br class="clear_both" />
+			</div>
+		</div>
+	<% end %>
+</div>
+<div id="blog_posts_pager">
+	<%= paginate @posts, :param_name => :blog_page %>	
+</div>

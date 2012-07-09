@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		
+		<title>Suwaru</title>
+		
+		<%= javascript_include_tag :defaults %>
+
+		<%= render "include/jQueryUI/jqueryui_widgets" %>
+		<%= render "include/jQueryUI/jqueryui_effects" %>
+		<%= render "include/jQueryUI/jqueryui_interactions" %>
+
+		<%= render "include/tinymce" %>
+
+		<!--[if lt IE 9]>
+ 			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  		<![endif]-->
+		
+		<%= render "include/suwaru" %>
+
+		<%= csrf_meta_tag %>
+	</head>
+	<body>
+		<div id="site_header">
+			<nav id="site_nav" class="left_align">
+				<ul>
+					<li><%= link_to "Home", root_path %></li>
+					<li><%= link_to "Blog", blog_path %></li>
+					<li><%= link_to "Workshop", workshop_path %></li>
+					<li><%= link_to "Contact Us", "/contact_forms/2" %></li>
+				</ul>
+			</nav>
+			<span id="session_info" class="right_align">
+				<%= render "shared/session_info" %>
+			</span>
+			<br class="clear_both" />
+		</div>
+		<div id="page_container">
+			<div id="page_content">
+				<div id="left_content_section" class="left_align">
+					<header id="page_header">
+						<a href="#" id="logo" class="left_align">
+							<img src="/images/Suwaru.png" width="50" height="23" alt="logo"/>
+						</a>    
+		  				<span class="right_align">
+
+						</span>
+						<br class="clear_both" />
+					</header>
+					<div id="page_body">
+						<% if !notice.nil? && (notice.length <= 0) %>
+							<h4 id="notice" class="alert_info"><%= notice %></h4>
+						<% end %>
+						<% if !alert.nil? && (alert.length > 0) %>
+							<h4 id="alert" class="alert_warning"><%= alert %></h4>
+						<% end %>
+						<%= yield %>
+					</div>
+				</div>
+				<aside id="right_categories_list" class="right_align">
+					<label id="categories_list_banner">Suwaru Categories</label>
+					<ul id="categories_list">
+						<% Category.all.each do |aCategory| %>
+							<li><%= link_to aCategory.Name, aCategory %></li>
+						<% end %>
+					</ul>
+				</aside>
+				<br class="clear_both" />
+			</div>
+			<div id="page_footer">
+      			<span class="left_align"> © 2012 Suwaru</span>
+     			<span class="right_align">Some encouraging stuff about me and my work</span> 
+				<br class="clear_both" />
+   			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,11 @@
+<script type="text/javascript">
+	$(function(){
+		$("#exit_overlay_button").button({
+			icons:{
+				secondary: "ui-icon-close"
+			}
+		}).click(function(){
+			$("#modal_overlay").overlay().close();
+		});
+	});
+</script>

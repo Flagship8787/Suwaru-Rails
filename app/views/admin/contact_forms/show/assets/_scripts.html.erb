@@ -1,0 +1,102 @@
+<script type="text/javascript">
+	$().ready(function(){
+		<% if !@contact_form.Recipients.empty? && @contact_form.Recipients.size > 0 %>
+			$("#no_contact_form_recipients").hide();
+		<% end %> 
+
+		$("#add_contact_form_recipient").button().click(function(){
+			
+			var requestJSON = {
+				"cfid":$("#contact_form_id").attr("value")
+			};
+			
+			$.ajax({data:requestJSON, type: "GET", url:"/admin/contact_form_recipients/new",
+				beforeSend:function(xhr, settings){
+					indicate_activity($("#contact_form_recipients_wrap"));
+				},complete:function(xhr, status){
+
+				},success:function(data, status, xhr){	
+					indicate_activity($("#contact_form_recipients_wrap"));
+					
+					$("#no_contact_form_recipients").remove();
+					$("#contact_form_recipients_list").prepend(data).effect("highlight");
+					
+				},error:function(xhr, settings, error){	
+					indicate_activity($("#contact_form_recipients_wrap"));
+					alert("Failed to find cancel the edit recipient action.");
+				}
+			});
+		});
+		refresh_ui_elements();	
+	});
+	
+	var edit_button_onclick = function(){
+		var recipient_wrap 	= $(this).parent(".recipient_options_wrap").parent(".contact_form_recipient_wrap")
+		var recipient_id 	= recipient_wrap.find(".contact_form_recipient_id").first().attr("value");
+		
+		$.ajax({type: "GET", url:"/admin/contact_form_recipients/" + recipient_id + "/edit",
+			beforeSend:function(xhr, settings){
+				indicate_activity($("#contact_form_recipients_wrap"));
+			},complete:function(xhr, status){
+				
+			},success:function(data, status, xhr){	
+				indicate_activity($("#contact_form_recipients_wrap"));
+				recipient_wrap.replaceWith(data);
+			},error:function(xhr, settings, error){	
+				indicate_activity($("#contact_form_recipients_wrap"));
+				alert("Failed to edit contact form recipient.");
+			}
+		});
+	}
+	var destroy_button_onclick = function(){
+		
+		var recipient_wrap 	= $(this).parent(".recipient_options_wrap").parent(".contact_form_recipient_wrap");
+		
+		var recipient_name 	= recipient_wrap.find(".reciepient_wrap").first().text();
+		var recipient_id 	= recipient_wrap.find(".contact_form_recipient_id").first().attr("value");
+		
+		if(confirm("Are you sure you want to remove " + recipient_name + " from the recipients list?")){
+			$.ajax({type: "DELETE", url:"/admin/contact_form_recipients/" + recipient_id,
+				beforeSend:function(xhr, settings){
+					indicate_activity($("#contact_form_recipients_wrap"));
+				},complete:function(xhr, status){
+
+				},success:function(data, status, xhr){	
+					
+					indicate_activity($("#contact_form_recipients_wrap"));
+					recipient_wrap.remove();
+					
+					refresh_num_recipients();
+					
+				},error:function(xhr, settings, error){	
+					indicate_activity($("#contact_form_recipients_wrap"));
+					alert("Failed to edit contact form recipient.");
+				}
+			});
+		}
+	}
+	
+	function refresh_ui_elements(){
+		$(".edit_contact_form_recipient").button("destroy");
+		$(".edit_contact_form_recipient").button();
+		
+		$(".destroy_contact_form_recipient").button("destroy");
+		$(".destroy_contact_form_recipient").button();
+		
+		$(".edit_contact_form_recipient").unbind("click", edit_button_onclick);
+		$(".edit_contact_form_recipient").bind("click", edit_button_onclick);
+		
+		$(".destroy_contact_form_recipient").unbind("click", destroy_button_onclick);
+		$(".destroy_contact_form_recipient").bind("click", destroy_button_onclick);
+		
+		refresh_num_recipients();
+	}
+	function refresh_num_recipients(){
+		var recipients = $("#contact_form_recipients_list > .contact_form_recipient_wrap");
+		$("#recipients_count").text((recipients == null ? "0" : recipients.length) + " Recipients");
+		
+		if(recipients == null || recipients.length <= 0){
+			$("#no_contact_form_recipients").show();
+		}
+	}
+</script>

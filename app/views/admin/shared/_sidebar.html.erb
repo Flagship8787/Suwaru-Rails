@@ -1,0 +1,59 @@
+<aside id="sidebar" class="column">
+	<form class="quick_search">
+		<input type="text" value="Quick Search" onfocus="if(!this._haschanged){this.value=''};this._haschanged=true;">
+	</form>
+	<hr/>
+	<h3>Admin</h3>
+	<ul class="toggle">
+		<li class="icn_settings"><a href="#">Dashboard</a></li>
+		<li class="icn_profile"><a href="#">My Account</a></li>
+		<li class="icn_jump_back"><a href="#">Logout</a></li>
+	</ul>
+	<h3>Content Managment</h3>
+	<ul class="toggle">
+		<li class="icn_categories"><%= link_to "Categories", admin_categories_path %></li>
+		<li class="icn_tags"><%= link_to "Tags", admin_tags_path %></li>
+		<li class="icn_tags"><%= link_to "Comments", admin_comments_path %></li>
+		<li class="icn_tags"><%= link_to "Flagged", admin_flags_path %></li>
+	</ul>
+	<h3>Blog</h3>
+	<ul class="toggle">
+		<li class="icn_new_article"><%= link_to "New Post", new_admin_post_path %></li>
+		<li class="icn_edit_article"><%= link_to "All Posts", admin_posts_path %></li>
+	</ul>
+	<h3>Projects</h3>
+	<ul class="toggle">
+		<li class="icn_new_article"><%= link_to "New Project", new_admin_project_path %></li>
+		<li class="icn_edit_article"><%= link_to "All Projects", admin_projects_path %></li>
+	</ul>
+	<h3>Users</h3>
+	<ul class="toggle">
+		<li class="icn_add_user"><%= link_to "New Users", new_admin_user_path %></li>
+		<li class="icn_view_users"><%= link_to "All Users", admin_users_path %></li>
+	</ul>
+	<h3>Roles</h3>
+	<ul class="toggle">
+		<li class="icn_add_user"><%= link_to "Add Role", new_admin_role_path %></li>
+		<li class="icn_view_users"><%= link_to "All Roles", admin_roles_path %></li>
+	</ul>
+	<h3>Contact Forms</h3>
+	<ul class="toggle">
+		<li class="icn_new_article"><%= link_to "All Contact Forms", admin_contact_forms_path %></li>
+		<li class="icn_edit_article"><%= link_to "New Contact Form", new_admin_contact_form_path %></li>
+		<li class="icn_edit_article"><%= link_to "Contact Messages", admin_contact_messages_path %></li>
+	</ul>
+	<!--
+	<h3>Media</h3>
+	<ul class="toggle">
+		<li class="icn_folder"><a href="#">File Manager</a></li>
+		<li class="icn_photo"><a href="#">Gallery</a></li>
+		<li class="icn_audio"><a href="#">Audio</a></li>
+		<li class="icn_video"><a href="#">Video</a></li>
+	</ul>
+	-->
+	<footer>
+		<hr />
+		<p><strong>Copyright &copy; 2011 Website Admin</strong></p>
+		<p>Theme by <a href="http://www.medialoot.com">MediaLoot</a></p>
+	</footer>
+</aside><!-- end of sidebar -->

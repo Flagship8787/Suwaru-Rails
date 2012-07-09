@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  contact_message_id: 1
+  contact_form_recipient_id: 1
+  MessageRead: 2012-05-31 03:05:33
+
+two:
+  contact_message_id: 1
+  contact_form_recipient_id: 1
+  MessageRead: 2012-05-31 03:05:33

@@ -1,0 +1,26 @@
+<% @posts = Post.page(params[:posts_page]).per(3) %>
+<section id="posts_list_column" class="left_align">
+	<h3 id="posts_list_banner">Latest Posts</h3>
+	<div id="posts_list">
+		<% @posts.each do |post| %>
+			<div class="post_wrap">
+				<h4><%= link_to (post.Title.length > 75 ? post.Title[0..72] + "..." : post.Title), post %></h4>
+				<span class="post_info">
+				</span>
+				<article class="post_preview">
+					<% post_body = strip_tags(post.Body) %>
+					<p>
+						<% if post_body.length > 240 %>
+							<%= post_body[0..237] + "..." %>
+						<% else %>
+							<%= post_body %>
+						<% end %>
+					</p>
+				</article>
+			</div>
+		<% end %>
+	</div>
+	<div id="posts_pager_wrap">
+		<%= paginate @posts, :param_name => :posts_page %>
+	</div>
+</section>

@@ -1,0 +1,24 @@
+<style type="text/css">
+	#authenticate_facebook_wrap{
+		padding: 16px 18px 16px 18px;
+	}
+	#authenticate_facebook_wrap{
+		text-indent: 18px;
+	}
+	#authenticate_facebook_wrap > p{
+		text-align:center;
+	}
+	#facebook_logo{
+		margin: 0px 18px 18px 0px;
+		float: left;
+	}
+</style>
+<div id="authenticate_facebook_wrap">
+	<%= image_tag "/images/icons/facebook/logo_128.png", :id => "facebook_logo" %>
+	<p id="facebook_auth_explanation">
+		Where have you been, if you don't know what Facebook is?
+	</p>
+	<p style="text-align: center">
+		<%= link_to "Authenticate Now", "/auth/facebook" %>
+	</p>
+</div>

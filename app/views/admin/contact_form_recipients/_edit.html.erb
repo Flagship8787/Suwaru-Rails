@@ -1,0 +1,5 @@
+<div id="edit_contact_form_recipient_form_wrap" class="contact_form_recipient_form_wrap">
+	<%= hidden_field_tag "contact_form_recipient_" + @contact_form_recipient.id.to_s + "_id", @contact_form_recipient.id.to_s,
+	 					 :class => "contact_form_recipient_id" %>
+	<%= render "admin/contact_form_recipients/form" %>
+</div>

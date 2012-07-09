@@ -1,0 +1,14 @@
+<users-list>
+	<user username="Flagship8787" email="Flagship8787@gmail.com" password="sms87871414" role="Web Master" />
+	<user username="RepMannBach" email="repmannbach@gmail.com" password="M@nnB@ch?!?" role="Web Master" />
+	
+	<user username="admin_1" email="admin_1@gmail.com" password="admin_1_pass" role="Administrator" />
+	<user username="admin_2" email="admin_2@gmail.com" password="admin_2_pass" role="Administrator" />
+	<user username="admin_3" email="admin_3@gmail.com" password="admin_2_pass" role="Administrator" />
+	
+	<user username="visitor_1" email="visitor_1@gmail.com" password="visitor_1_pass" role="Visitor" />
+	<user username="visitor_2" email="visitor_2@gmail.com" password="visitor_2_pass" role="Visitor" />
+	<user username="visitor_3" email="visitor_3@gmail.com" password="visitor_3_pass" role="Visitor" />
+	<user username="visitor_4" email="visitor_4@gmail.com" password="visitor_4_pass" role="Visitor" />
+	<user username="visitor_5" email="visitor_5@gmail.com" password="visitor_5_pass" role="Visitor" />
+</users-list>

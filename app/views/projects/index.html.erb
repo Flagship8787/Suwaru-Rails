@@ -1,0 +1,26 @@
+<style type="text/css">
+	#projects_index_banner{
+		border-bottom: none;
+		font-size: 24px;
+		line-height: 32px
+	}
+</style>
+<h2 id="projects_index_banner">Listing <%= @projects.nil? ? "0" : @projects.length.to_s %> projects</h2>
+<div id="projects_index_list">
+	<% @projects.each do |project| %>
+		<div class="project_wrap">
+			<h3><%= link_to project.Name, project %></h3>
+			Created by <%= link_to project.CreatedBy.username, project.CreatedBy %>
+			<div class="project_description">
+				<p>
+					<% stripped = strip_tags(project.Description) %>
+					<% if stripped.length > 300 %>
+						<%= stripped[0..300] + "..." %>
+					<% else %>
+						<%= stripped %>
+					<% end %>
+				</p>
+			</div>
+		</div>
+	<% end %>
+</div>

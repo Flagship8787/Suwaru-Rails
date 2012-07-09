@@ -1,0 +1,24 @@
+/*****
+ * 	Generic Styles
+ *****/
+.left_align{
+	float:left;
+}
+.right_align{
+	float:right;
+}
+.clear_both{
+	clear:both;
+}
+
+.ui-button-text{
+	font-size: 12px;
+}
+
+a.flag_link{
+	padding-left: 18px;
+	padding-top: 3px;
+	padding-bottom: 2px;
+	vertical-align: middle;
+	background: transparent url("/images/icons/flag_red_16.png") center left no-repeat;
+}

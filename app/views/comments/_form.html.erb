@@ -1,0 +1,27 @@
+<%= render "comments/form/assets/styles" %>
+<%= render "comments/form/assets/scripts" %>
+<%= form_for(@comment, :remote => true, :html => {:id => "ajax_comment_form"}) do |f| %>
+	<div id="comment_form_content">
+		<% if @comment.errors.any? %>
+	    	<div id="error_explanation">
+				<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+				<ul>
+					<% @comment.errors.full_messages.each do |msg| %>
+	        			<li><%= msg %></li>
+	      			<% end %>
+	      		</ul>
+	    	</div>
+	  	<% end %>
+		<%= f.hidden_field :parent_id %>
+		<%= f.hidden_field :parent_type %>
+		<%= f.hidden_field :created_by_id %>
+		<div class="field">
+			<%= f.text_area :Body %>
+	  	</div>
+	</div>
+  	<div id="comment_form_actions" class="actions ui-corner-br ui-corner-bl ui-widget-header">
+		<button id="cancel_form_button" class="left_align">Cancel</button>
+		<%= f.submit "Save Comment", :class => "right_align" %>
+		<br class="clear_both" />
+  	</div>
+<% end %>

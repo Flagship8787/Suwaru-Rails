@@ -1,0 +1,24 @@
+<style type="text/css">
+	#authenticate_twitter_wrap{
+		padding: 16px 18px 16px 18px;
+	}
+	#authenticate_twitter_wrap{
+		text-indent: 18px;
+	}
+	#authenticate_twitter_wrap > p{
+		text-align: center;
+	}
+	#twitter_logo{
+		margin: 0px 18px 18px 0px;
+		float: left;
+	}
+</style>
+<div id="authenticate_twitter_wrap">
+	<%= image_tag "/images/icons/twitter/Logo_128.png", :id => "twitter_logo" %>
+	<p id="twitter_auth_explanation">
+		Where have you been, if you don't know what Twitter is?
+	</p>
+	<p style="text-align: center">
+		<%= link_to "Authenticate Now", "/auth/twitter" %>
+	</p>
+</div>

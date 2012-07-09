@@ -1,0 +1,25 @@
+<div id="comment_<%= comment.id.to_s %>" class="comment_preview">
+	<header class="comment_header ui-corner-tl ui-corner-tr">
+		<span class="left_align">
+			<%= flag_link_for comment %>
+		</span>
+		<span class="right_align">
+			<%= link_to "View Full", comment %>
+		</span>
+		<br class="clear_both" />
+	</header>
+	<article class="comment_content ui-corner-br ui-corner-bl">
+		<article class="comment_body">
+			<%= raw(comment.Body) %>
+		</article>
+		<article class="comment_posting_info">
+			Posted by 
+			<% if comment.CreatedBy.nil? %>
+				<span style="color:gray ; font-style: italic"Anonymous</span>
+			<% else %>
+				<%= link_to comment.CreatedBy.username, comment.CreatedBy %>
+			<% end %>
+		 	On <%= comment.created_at.to_s(:date_time_12_full) %>
+		</article>
+	</article>
+</div>

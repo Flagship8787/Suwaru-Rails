@@ -1,0 +1,14 @@
+<div id="contact_form_recipient_<%= @contact_form_recipient.id.to_s %>_wrap" class="contact_form_recipient_wrap">
+	<%= hidden_field_tag 	"contact_form_recipient_" + @contact_form_recipient.id.to_s + "_id", 
+							@contact_form_recipient.id.to_s, 
+							:class => "contact_form_recipient_id" %>
+							
+	<div class="reciepient_wrap left_align">
+		<%= @contact_form_recipient.Recipient.username %>
+	</div>
+	<div class="recipient_options_wrap right_align">
+		<button class="edit_contact_form_recipient">Edit</button>
+		<button class="destroy_contact_form_recipient">Destroy</button>
+	</div>
+	<br class="clear_both" />
+</div>

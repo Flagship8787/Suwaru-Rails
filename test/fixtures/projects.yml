@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  Platform: MyString
+  Name: MyString
+  Description: MyText
+  Repository: MyString
+  Public: false
+
+two:
+  Platform: MyString
+  Name: MyString
+  Description: MyText
+  Repository: MyString
+  Public: false

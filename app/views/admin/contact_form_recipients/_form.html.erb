@@ -1,0 +1,28 @@
+<%= render :partial => "admin/contact_form_recipients/form/assets/styles" %>
+<%= render :partial => "admin/contact_form_recipients/form/assets/scripts" %>
+<%= form_for(	@contact_form_recipient, 
+				:remote => true,
+				:url => (@contact_form_recipient.id.nil? ? admin_contact_form_recipients_path : admin_contact_form_recipient_path(@contact_form_recipients)),
+				:html => {:id => "ajax_contact_form_recipient_form"}) do |f| %>
+  	<% if @contact_form_recipient.errors.any? %>
+    	<div id="error_explanation">
+      		<h2><%= pluralize(@contact_form_recipient.errors.count, "error") %> prohibited this contact_form from being saved:</h2>
+      		<ul>
+      			<% @contact_form_recipient.errors.full_messages.each do |msg| %>
+        			<li><%= msg %></li>
+      			<% end %>
+      		</ul>
+    	</div>
+  	<% end %>
+  	<%= f.hidden_field :contact_form_id %>
+	<div class="message_fields">
+		<div class="field left_align">
+	    	<%= f.select :recipient_id, User.all.collect{ |aUser| [aUser.username, aUser.id] } %>
+	  	</div>
+		<div class="actions right_align">
+	    	<%= f.submit "Save Recipient" %>
+			<button id="cancel_contact_form_recipient_form">Cancel</button>
+	  	</div>
+		<br class="clear_both" />
+	</div>
+<% end %>

@@ -1,0 +1,26 @@
+<%= render "contact_messages/form/assets/styles" %>
+<%= render "contact_messages/form/assets/scripts" %>
+<%= form_for(@contact_message) do |f| %>
+	<% if @contact_message.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@contact_message.errors.count, "error") %> prohibited this contact_message from being saved:</h2>
+			<ul>
+      			<% @contact_message.errors.full_messages.each do |msg| %>
+        			<li><%= msg %></li>
+      			<% end %>
+      		</ul>
+    	</div>
+  	<% end %>
+  	<%= f.hidden_field :contact_form_id %>
+  	<div class="field">
+    	<%= f.label :Subject %><br />
+    	<%= f.text_field :Subject %>
+  	</div>
+  	<div class="field">
+    	<%= f.label :Body %><br />
+    	<%= f.text_area :Body %>
+  	</div>
+  	<div class="actions">
+    	<%= f.submit %>
+  	</div>
+<% end %>
