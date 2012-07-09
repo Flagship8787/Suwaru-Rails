@@ -2,10 +2,8 @@ class CreateTaggedContents < ActiveRecord::Migration
   def self.up
     create_table :tagged_contents do |t|
       
-      t.integer :content_id
-      t.string  :content_type
-      
-      t.integer :tag_id
+      t.integer :site_content_id, :null => true
+      t.integer :tag_id,          :null => true
 
       t.timestamps
     end

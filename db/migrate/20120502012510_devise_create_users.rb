@@ -3,7 +3,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
     create_table(:users) do |t|
     
       t.integer :role_id,        :null => true
-    
       t.string  :username,       :null => true
       
       t.database_authenticatable :null => false

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120709022829) do
+ActiveRecord::Schema.define(:version => 20120709023541) do
 
   create_table "articles", :force => true do |t|
     t.string   "Title"
@@ -42,9 +42,9 @@ ActiveRecord::Schema.define(:version => 20120709022829) do
   create_table "comments", :force => true do |t|
     t.integer  "parent_id"
     t.string   "parent_type"
-    t.integer  "created_by_id"
+    t.integer  "poster_id"
     t.datetime "Approved"
-    t.boolean  "Flagged",       :default => false
+    t.integer  "approved_by_id"
     t.text     "Body"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -58,11 +58,9 @@ ActiveRecord::Schema.define(:version => 20120709022829) do
   end
 
   create_table "contact_forms", :force => true do |t|
-    t.integer  "created_by_id"
-    t.integer  "modified_by_id"
     t.string   "Name"
     t.text     "Description"
-    t.boolean  "AllowGuest",     :default => false
+    t.boolean  "AllowGuest",  :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -84,23 +82,6 @@ ActiveRecord::Schema.define(:version => 20120709022829) do
     t.datetime "updated_at"
   end
 
-  create_table "content_categories", :force => true do |t|
-    t.integer  "content_id"
-    t.string   "content_type"
-    t.integer  "category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "contents", :force => true do |t|
-    t.integer  "created_by_id"
-    t.integer  "modified_by_id"
-    t.integer  "content_id"
-    t.string   "content_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "flags", :force => true do |t|
     t.integer  "flagged_id"
     t.string   "flagged_type"
@@ -114,21 +95,9 @@ ActiveRecord::Schema.define(:version => 20120709022829) do
     t.datetime "updated_at"
   end
 
-  create_table "pages", :force => true do |t|
-    t.string   "Title"
-    t.text     "Body"
-    t.integer  "created_by_id"
-    t.integer  "modified_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "posts", :force => true do |t|
     t.string   "Title"
     t.text     "Body"
-    t.integer  "created_by_id"
-    t.integer  "modified_by_id"
-    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -137,7 +106,6 @@ ActiveRecord::Schema.define(:version => 20120709022829) do
     t.string   "Name"
     t.text     "Description"
     t.integer  "github_auth_id"
-    t.integer  "category_id"
     t.integer  "GithubId"
     t.text     "GithubAttributes"
     t.datetime "GithubSynced"
@@ -152,9 +120,20 @@ ActiveRecord::Schema.define(:version => 20120709022829) do
     t.datetime "updated_at"
   end
 
-  create_table "tagged_contents", :force => true do |t|
+  create_table "site_contents", :force => true do |t|
     t.integer  "content_id"
     t.string   "content_type"
+    t.integer  "category_id"
+    t.integer  "created_by_id"
+    t.integer  "modified_by_id"
+    t.integer  "published_by_id"
+    t.datetime "Published"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tagged_contents", :force => true do |t|
+    t.integer  "site_content_id"
     t.integer  "tag_id"
     t.datetime "created_at"
     t.datetime "updated_at"

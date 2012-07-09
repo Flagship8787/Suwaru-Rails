@@ -4,10 +4,6 @@ Suwaru::Application.routes.draw do
 
   resources :articles
 
-  resources :content_categories
-
-  resources :pages
-
   resources :flags
 
   resources :tags

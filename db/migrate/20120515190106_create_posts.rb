@@ -2,13 +2,8 @@ class CreatePosts < ActiveRecord::Migration
   def self.up
     create_table :posts do |t|
       
-      t.string  :Title
-      t.text    :Body
-      
-      t.integer :created_by_id
-      t.integer :modified_by_id
-
-      t.integer :category_id
+      t.string  :Title,             :null => true
+      t.text    :Body,              :null => true
 
       t.timestamps
     end

@@ -5,10 +5,10 @@ class CreateComments < ActiveRecord::Migration
       t.integer   :parent_id,       :null => true
       t.string    :parent_type,     :null => true
       
-      t.integer   :created_by_id,   :null => true
+      t.integer   :poster_id,       :null => true
 
       t.datetime  :Approved,        :null => true
-      t.boolean   :Flagged,         :default => false
+      t.integer   :approved_by_id,  :null => true
 
       t.text      :Body,            :null => true
 

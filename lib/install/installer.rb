@@ -14,9 +14,9 @@ class Installer
       RolesInstaller.InstallRoles  
       UsersInstaller.InstallUsers
       CategoriesInstaller.InstallCategories
-      PostsInstaller.InstallPosts
-      ProjectsInstaller.InstallProjects
-      ContactFormsInstaller.InstallContactForms
+      #PostsInstaller.InstallPosts
+      #ProjectsInstaller.InstallProjects
+      #ContactFormsInstaller.InstallContactForms
       TagsInstaller.InstallTags
     end
   end

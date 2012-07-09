@@ -6,7 +6,6 @@ class CreateProjects < ActiveRecord::Migration
       t.text      :Description,         :null => true
       
       t.integer   :github_auth_id,      :null => true
-      t.integer   :category_id,         :null => true
       
       t.integer   :GithubId,            :null => true
       t.text      :GithubAttributes,    :null => true
