@@ -1,0 +1,28 @@
+<article class="post">
+	<header>
+		<h3><%= post.Title %></h3>
+		<p class="postinfo">
+			Published on <time><%= post.updated_at.to_s(:date_medium) %></time> by 
+			<span class="author"><%= link_to post.SiteContent.CreatedBy.username, post.SiteContent.CreatedBy %></span> in 
+			<%= link_to post.SiteContent.Category.Name, post.SiteContent.Category %>
+		</p>
+	</header>
+	<p class="post_content">
+		<% stripped = strip_tags(post.Body) %>
+		<% if !stripped.nil? && stripped.length >= 350 %>
+			<%= stripped[0..350] + "..." %>
+		<% else %>
+			<%= stripped %>
+		<% end %>
+	</p>
+	<footer>
+		<span class="left_align">
+			<% tag_links = post.SiteContent.Tags.collect{ |aTag| link_to(aTag.Name, aTag) } %>
+			Tags: <%= raw(tag_links.join(", ")) %>
+		</span>
+		<span class="right_align">
+			<%= link_to "Read Full Post", post %>
+		</span>
+		<br class="clear_both" />
+	</footer>
+</article>

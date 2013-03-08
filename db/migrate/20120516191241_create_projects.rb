@@ -2,7 +2,7 @@ class CreateProjects < ActiveRecord::Migration
   def self.up
     create_table :projects do |t|
       
-      t.string    :Name,                :null => true
+      t.string    :Title,               :null => true
       t.text      :Description,         :null => true
       
       t.integer   :github_auth_id,      :null => true

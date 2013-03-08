@@ -1,21 +1,9 @@
-<!--start menu-->
-<nav id="site_nav">
+<nav id="sitenav">
 	<ul>
-		<li><%= link_to "Home", "/", :class => "current" %></li>
-		<li><%= link_to "Projects", "#" %></li>
-		<li><%= link_to "Blog", blog_path %></li>
-		<li><%= link_to "Contact Us", "/contact_forms/1" %></li>
-		<!--
-		<li><%= link_to "Twitter", "/auth/twitter" %></li>
-		<li><%= link_to "Github", "/auth/github" %></li>
-		<li><%= link_to "FaceBook", "/auth/facebook" %></li>
-		-->
-		<% if user_signed_in? %>
-			<li><%= link_to "Admin", admin_root_path, :class => "admin"  %></li>
-		<% else %>
-			<li><%= link_to "Sign In", new_user_session_path, :class => "login"  %></li>
-		<% end %>	
-	</ul>
+		<%= nav_link_for "Home", root_path %>
+		<%= nav_link_for "Blog", blog_path %>
+		<%= nav_link_for "Workshop", workshop_path %>
+		<%#= nav_link_for "About Us", about_us_path %>
+		<%= nav_link_for "Contact", contact_us_path %>
+	</ul>			
 </nav>
-<!--end menu-->
-

@@ -1,40 +1,49 @@
 module SuwaruContent  
   module ContentType
-    attr_accessor :Published
+    attr_accessor :BannerImage, :ThumbImage
     
     def self.included(base)
       base.after_initialize :initialize_site_content
-      base.after_save :assign_publishing
+      base.after_find :load_attributes
+      base.after_create :save_creator
     end
-    
-    def Published
-      return @Published if !@Published.nil?
-      return false if self.SiteContent.nil?
-      return (self.SiteContent.Published.nil? ? false : true)
-    end
-    
-    def Published?
-      self.Published
-    end
-    
+
   private
     def initialize_site_content
       self.SiteContent = SiteContent.new if self.SiteContent.nil?
+      self.SiteContent.content_type = self.class.to_s if self.SiteContent.content_type.nil?
     end
-    def assign_publishing
-      if self.SiteContent.Published.nil? && @Published == true
-        puts "Publishing " + self.class.to_s
-        self.SiteContent.update_attribute("Published", Time.now)
-      end  
-      if !self.SiteContent.Published.nil? && @Published == false
-        puts "Un-Publishing " + self.class.to_s
-        self.SiteContent.update_attribute("Published", nil)
-      end  
+    def save_creator
+      self.SiteContent.created_by_id = self.SiteContent.modified_by_id
+    end
+    def load_attributes
+      # => loading banner image
+      if self.SiteContent.nil? || self.SiteContent.Banner_file_name.nil?
+        self.BannerImage = nil
+      else
+        self.BannerImage = File.join(SiteContent.image_directory, self.SiteContent.Banner_file_name)
+      end
+
+      # => loading banner image
+      if self.SiteContent.nil? || self.SiteContent.Thumb_file_name.nil?
+        self.ThumbImage = nil
+      else
+        self.ThumbImage = File.join(SiteContent.image_directory, self.SiteContent.Thumb_file_name)
+      end 
     end
   end
   module Commentable
+    def self.included(base)
+      base.after_create :auto_comment
+    end
     def Commentable?
       return true
+    end
+
+  private
+    def auto_comment
+      self.SiteContent.Comments << Comment.new({:Body => "Hello you " + self.class.to_s + "! This is the first comment on you!"})
+      self.SiteContent.Comments << Comment.new({:Body => "Hello you " + self.class.to_s + "! This is the second comment on you!"})
     end
   end
   module Taggable
@@ -50,20 +59,22 @@ module SuwaruContent
     end 
     
     def tag_names
-      @tag_names# || self.SiteContent.Tags.map(&:Name).join(' ')
+      @tag_names || self.SiteContent.Tags.map(&:Name).join(' ')
     end
   
   private
     def assign_tags
-=begin
+      
+      puts "Assigning tags for " + self.class.to_s + ": " + (@tag_names ? @tag_names : "NIL")
+      
       if @tag_names
         @tag_names.split(/\s+/).each do |name|
           aTag = Tag.find_or_create_by_Name(name)
-          self.Content.TaggedContents << TaggedContent.new({:Content => self, :Tag => aTag}) if !self.TaggedContents.exists?({:tag_id => aTag.id})
+          if !self.SiteContent.TaggedContents.exists?({:tag_id => aTag.id})
+            self.SiteContent.TaggedContents << TaggedContent.new({:SiteContent => self.SiteContent, :Tag => aTag})
+          end
         end
       end
-=end
-      puts "Assigning tags for " + self.class.to_s
     end
   end
   module Flaggable
@@ -79,7 +90,7 @@ module SuwaruContent
     end
     
     def category_name
-      @category_name# || self.SiteContent.Category.Name
+      @category_name || (self.SiteContent.Category ? self.SiteContent.Category.Name : nil)
     end
     
     def Categorizable?
@@ -88,8 +99,12 @@ module SuwaruContent
   
   private
     def assign_category
+      puts "Assigning categories for " + self.class.to_s + ": " + (@category_name ? @category_name : "NIL")
+      
       if @category_name
         self.SiteContent.update_attribute("category_id", Category.find_or_create_by_Name(@category_name).id)
+      elsif self.SiteContent.category_id.nil?
+        self.SiteContent.update_attribute("category_id", Category.find_or_create_by_Name("Miscellaneous").id) 
       end
     end
   end

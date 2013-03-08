@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en-US">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Silver Blog | Free WordPress Theme</title>
+		
+		<%= javascript_include_tag :defaults %>
+
+		<!--[if IE]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+			<![endif]-->
+			<!--[if IE 6]>
+			<script src="/frameworks/silverblog/js/belatedPNG.js"></script>
+			<script>
+				DD_belatedPNG.fix('*');
+			</script>
+		<![endif]-->
+		
+		<script src="/frameworks/silverblog/js/jquery-1.4.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/frameworks/silverblog/js/loopedslider.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			$(function(){
+				$('#slider').loopedSlider({
+					autoStart: 6000,
+					restart: 5000
+				});
+				
+			});
+		</script> 
+		
+		<%= render "include/jQueryUI/jqueryui_widgets" %>
+		<%= render "include/jQueryUI/jqueryui_effects" %>
+		<%= render "include/jQueryUI/jqueryui_interactions" %>
+
+		<%= render "include/tinymce" %>
+
+		<%= stylesheet_link_tag "scaffold" %>
+		<%= stylesheet_link_tag "Suwaru" %>
+		<%= stylesheet_link_tag "public" %>
+		
+		<%= javascript_include_tag "Suwaru" %>
+
+		<%= csrf_meta_tag %>
+	</head>
+	<body>
+		<div id="bodywrap">
+			<section id="pagetop">
+				<%= render "shared/navbar" %>
+				<%= render "shared/session_info" %>
+			</section>
+			<header id="pageheader">
+				<h1>座る<span>Suwaru</span></h1>
+				<!--
+				<div id="search">
+					<form action="#">
+						<div class="searchfield">
+							<input type="text" name="search" id="s">
+						</div>
+						<div class="searchbtn">
+							<input type="image" src="/frameworks/silverblog/images/searchbtn.png" alt="search">
+						</div>
+					</form>
+				</div>
+				-->
+			</header>
+			<div id="contents">
+				<section id="main">
+					<% if !notice.nil? && (notice.length <= 0) %>
+						<h4 id="notice" class="notice_info"><%= notice %></h4>
+					<% end %>
+					<% if !alert.nil? && (alert.length > 0) %>
+						<h4 id="alert" class="alert_warning"><%= alert %></h4>
+					<% end %>
+					<%= yield %>
+				</section>
+				<%= render :partial => "shared/sidebar" %>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<footer id="pagefooter">
+			<div id="footerwrap">
+			<div class="copyright">2010 &copy; Your Copyright Information Goes Here</div>
+			<div class="credit">
+				<a href="http://cssheaven.org" title="Downlaod Free CSS Templates">Website Template</a> by CSSHeaven.org </div>
+			</div>
+		</footer>
+	</body>
+</html>

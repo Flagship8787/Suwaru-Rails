@@ -1,1 +1,1 @@
-#Authorization.default_role = :anonymous
+Authorization.default_role = :anonymous

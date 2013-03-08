@@ -1,5 +1,5 @@
 <section id="comments">
-	<h3>47 Responses to "Article Title</h3>
+	<h3><%= (@parent.Comments.empty? ? "0" : @parent.Comments.size.to_s) %> Responses to "Article Title</h3>
 	<div id="commentlist">
 		<% @parent.Comments.each do |aComment| %>
 			<article class="entry">
@@ -7,10 +7,10 @@
 					<img src="http://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=38">
 					<p class="author">
 						<span class="name">
-							<% if aComment.CreatedBy.nil? %>
+							<% if aComment.Poster.nil? %>
 								<span style="color:gray ; font-style: italic">Anonymous</span>
 							<% else %>
-								<%= link_to aComment.CreatedBy.username, aComment.CreatedBy %>
+								<%= link_to aComment.Poster.username, aComment.Poster %>
 							<% end %>
 						</span>
 						<time class="date">12 June 2010</time>
@@ -25,39 +25,6 @@
 			</article>
 		<% end %>
 	</div>
-	<h3 id="respond">Leave a Reply</h3>
-	<form action="#" method="post" id="commentform">
-		<p class="textfield">
-			<input name="author" id="author" value="" size="22" tabindex="1" type="text">
-			<label for="author">
-				<small>Name (required)</small>
-			</label>
-	   	</p>
-		<p class="textfield">
-			<input name="email" id="email" value="" size="22" tabindex="2" type="text">
-			<label for="email">
-				<small>Mail (will not be published) required)</small>
-			</label>
-	   	</p>
-	   	<p class="textfield">
-			<input name="url" id="url" value="" size="22" tabindex="3" type="text">
-			<label for="url">
-				<small>Website</small>
-			</label>
-	   	</p>
-	   	<p>
-			<small>
-				<strong>XHTML:</strong> You can use these tags:....
-			</small>
-	   	</p>
-		<p class="text-area">
-			<textarea name="comment" id="comment" cols="50" rows="10" tabindex="4">
-			</textarea>
-	   	</p>
-	   	<p>
-	       <input name="submit" id="submit" tabindex="5" type="image" src="/frameworks/silverblog/images/submit.png">
-	       <input name="comment_post_ID" value="1" type="hidden">
-	   	</p>
-	   	<div class="clear"></div>
-	</form>
+	<% @comment = Comment.new({:parent_id => @parent.id, :parent_type => @parent.class.to_s})%>
+	<%= render :partial => "comments/form" %>
 </section>

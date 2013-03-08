@@ -1,29 +1,27 @@
-<%= form_for(@project, :url => (@project.id.nil? ? admin_projects_path : admin_project_path(@project))) do |f| %>
+<%= render :partial => "admin/projects/form/assets/styles" %>
+<%= render :partial => "admin/projects/form/assets/scripts" %>
+<%= form_for(@project, :html => {:multipart => true}, :url => (@project.id.nil? ? admin_projects_path : admin_project_path(@project))) do |f| %>
 	<% if @project.errors.any? %>
 		<div id="error_explanation">
-			<h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
-
+	    	<h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
 			<ul>
-				<% @project.errors.full_messages.each do |msg| %>
-					<li><%= msg %></li>
-				<% end %>
-			</ul>
+		    	<% @project.errors.full_messages.each do |msg| %>
+		        	<li><%= msg %></li>
+		      	<% end %>
+		  	</ul>
 		</div>
-	<% end %>
-
+  	<% end %>
   	<div class="field">
-		<%= f.label :Name %><br />
-    	<%= f.text_field :Name %>
+		<%= f.label :Title %><br />
+  		<%= f.text_field :Title %>
   	</div>
+  	<% @content = @project %>
+  	<%= render :partial => "admin/site_contents/form", :locals => {:f => f} %>
 	<div class="field">
-		<%= f.label :tag_names %><br />
-		<%= f.text_field :tag_names %>
-	</div>
-  	<div class="field">
-    	<%= f.label :Description %><br />
-    	<%= f.text_area :Description %>
+  		<%= f.label :Description %><br />
+  		<%= f.text_area :Description %>
   	</div>
   	<div class="actions">
-    	<%= f.submit %>
+  		<%= f.submit "Save" %>
   	</div>
 <% end %>

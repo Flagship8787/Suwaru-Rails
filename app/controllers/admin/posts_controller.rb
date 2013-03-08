@@ -68,7 +68,7 @@ class Admin::PostsController < Admin::AdminController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to(posts_url) }
+      format.html { redirect_to(admin_posts_url) }
       format.xml  { head :ok }
     end
   end

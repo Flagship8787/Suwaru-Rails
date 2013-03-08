@@ -1,91 +1,36 @@
-<section id="featured">
-	<h2 class="ftheading">Featured</h2>
-	<div class="ftwrap">
-		<div class="ftimg">
-			<img src="/frameworks/silverblog/images/img1.jpg" width="204" height="128" alt="img1">
+<section id="main">
+	<section id="featured">
+		<h2 class="ftheading">Featured</h2>
+		<div class="ftwrap">
+			<div class="ftimg">
+				<img src="/frameworks/silverblog/images/img3.jpg" width="204" height="128" alt="img1">
+			</div>
+		  	<div class="fttxt">
+		  		<h3>Featured Content</h3>
+		  		<p>
+		  			Lorema psum dolor sit amet, consectetur adipiscing elit. Integer egestas purus bibendum neque aliquam ut posuere elit semper. Fusce sagittis pharetra eros, sit amet consequat sem mollis vitae. 
+				</p>
+			</div>
 		</div>
-	  	<div class="fttxt">
-	  		<h3>Featured Content</h3>
-	  		<p>
-	  			Lorema psum dolor sit amet, consectetur adipiscing elit. Integer egestas purus bibendum neque aliquam ut posuere elit semper. Fusce sagittis pharetra eros, sit amet consequat sem mollis vitae. 
-			</p>
+	</section>
+	<div id="leftcontainer">
+		<h2 class="mainheading">Latest from our <i>brilliant</i> contributors</h2>
+		<% if @contents.nil? || @contents.count <= 0 %>
+			<h3 style="font-weight: bold ; font-style: italic">Then again...maybe we got nuttin'</h4>
+		<% else %>
+			<% @contents.each do |content| %>
+				<% if content.content_type == Post.to_s %>
+					<%= render :partial => "posts/partials/preview", :locals => {:post => content.Content} %>
+				<% elsif content.content_type == Project.to_s %>
+					<%= render :partial => "projects/partials/preview", :locals => {:project => content.Content} %>
+				<% end %>
+			<% end %>
+		<% end %>
+		<!--
+		<div class="wp-pagenavi">
+			<span class="current">1</span><a href="/page/2/" title="2">2</a><a href="/page/3/" title="3">3</a><a href="/page/4/" title="4">4</a><a href="/page/5/" title="5">5</a><a href="/page/6/" title="6">6</a><a href="/page/7/" title="7">7</a><a href="/page/8/" title="8">8</a><a href="/page/2/">Next &raquo;</a><span class="extend">...</span><a href="/page/27/" title="Last &raquo;">Last &raquo;</a>
 		</div>
+		-->
+	    <div class="clear"></div>
 	</div>
 </section>
-<div id="leftcontainer">
-<h2 class="mainheading">Latest from the blog</h2>
-<article class="post">
-	<header>
-		<h3>Article Title</h3>
-		<p class="postinfo">Published on <time>18 August, 2010</time> under <a href="#">CSS Templates </a></p>
-	</header>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a diam eget velit fringilla consequat. Duis nec justo urna, at tempus augue. Curabitur tristique, mi vitae ultrices lacinia, ante odio auctor odio, quis bibendum nulla augue quis diam. Aenean commodo justo ac leo cursus porttitor. <a href="#">Read More</a>
-	</p>
-	<footer>
-		<span class="author">Authorname</span>
-		<span class="permalink"><a href="#permalink">Read Full</a></span>
-		<span class="comments"><a href="#">21 Comments</a></span>
-	</footer>
-</article>
-<article class="post">
-	<header>
-		<h3>Article Title</h3>
-		<p class="postinfo">Published on <time>18 August, 2010</time> under <a href="#">CSS Templates </a></p>
-	</header>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a diam eget velit fringilla consequat. Duis nec justo urna, at tempus augue. Curabitur tristique, mi vitae ultrices lacinia, ante odio auctor odio, quis bibendum nulla augue quis diam. Aenean commodo justo ac leo cursus porttitor. <a href="#">Read More</a>
-	</p>					
-	<footer>
-		<span class="author">Authorname</span>
-		<span class="permalink"><a href="#permalink">Read Full</a></span>
-		<span class="comments"><a href="#">21 Comments</a></span>
-	</footer>
-</article>
-<article class="post">
-	<header>
-		<h3>Article Title</h3>
-		<p class="postinfo">Published on <time>18 August, 2010</time> under <a href="#">CSS Templates </a></p>
-	</header>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a diam eget velit fringilla consequat. Duis nec justo urna, at tempus augue. Curabitur tristique, mi vitae ultrices lacinia, ante odio auctor odio, quis bibendum nulla augue quis diam. Aenean commodo justo ac leo cursus porttitor. <a href="#">Read More</a>
-	</p>
-	<footer>
-		<span class="author">Authorname</span>
-		<span class="permalink"><a href="#permalink">Read Full</a></span>
-		<span class="comments"><a href="#">21 Comments</a></span>
-	</footer>
-</article>	
-<article class="post">
-	<header>
-		<h3>Article Title</h3>
-		<p class="postinfo">Published on <time>18 August, 2010</time> under <a href="#">CSS Templates </a></p>
-	</header>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a diam eget velit fringilla consequat. Duis nec justo urna, at tempus augue. Curabitur tristique, mi vitae ultrices lacinia, ante odio auctor odio, quis bibendum nulla augue quis diam. Aenean commodo justo ac leo cursus porttitor.<a href="#">Read More</a>
-	</p>
-	<footer>
-		<span class="author">Authorname</span>
-		<span class="permalink"><a href="#permalink">Read Full</a></span>
-		<span class="comments"><a href="#">21 Comments</a></span>
-	</footer>
-</article>
-<article class="post">
-	<header>
-		<h3>Article Title</h3>
-		<p class="postinfo">Published on <time>18 August, 2010</time> under <a href="#">CSS Templates </a></p>
-	</header>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas a diam eget velit fringilla consequat. Duis nec justo urna, at tempus augue. Curabitur tristique, mi vitae ultrices lacinia, ante odio auctor odio, quis bibendum nulla augue quis diam. Aenean commodo justo ac leo cursus porttitor. <a href="#">Read More</a>
-	</p>
-	<footer>
-		<span class="author">Authorname</span>
-		<span class="permalink"><a href="#permalink">Read Full</a></span>
-		<span class="comments"><a href="#">21 Comments</a></span>
-	</footer>
-</article>
-<div class="wp-pagenavi">
-	<span class="current">1</span><a href="/page/2/" title="2">2</a><a href="/page/3/" title="3">3</a><a href="/page/4/" title="4">4</a><a href="/page/5/" title="5">5</a><a href="/page/6/" title="6">6</a><a href="/page/7/" title="7">7</a><a href="/page/8/" title="8">8</a><a href="/page/2/">Next &raquo;</a><span class="extend">...</span><a href="/page/27/" title="Last &raquo;">Last &raquo;</a>
-</div>
-<div class="clear"></div>
-</div>

@@ -1,10 +1,12 @@
 authorization do 
   role :web_master do
-    has_permission_on [:admin_posts, :posts],           :to => [:administrate]
-    has_permission_on [:admin_categories, :categories], :to => [:administrate]
-    has_permission_on [:admin_projects, :projects],     :to => [:administrate]
-    
-    has_permission_on [:tinymce],                       :to => [:use_advanced]
+    has_permission_on [:admin_posts, :posts],                   :to => [:administrate]
+    has_permission_on [:admin_projects, :projects],             :to => [:administrate]
+    has_permission_on [:admin_site_contents, :site_contents],   :to => [:administrate]
+    has_permission_on [:admin_categories, :categories],         :to => [:administrate]
+    has_permission_on [:admin_users, :users],                   :to => [:administrate]
+
+    has_permission_on [:tinymce],                               :to => [:use_advanced]
   end
   
   role :administrator do
@@ -12,11 +14,22 @@ authorization do
   end
   
   role :visitor do
-  
+
   end
-  
-  role :guest do
-    has_permission_on [:posts],                         :to => [:view]  
+
+  role :anonymous do
+    has_permission_on :site_contents, :to => :index
+    has_permission_on :site_contents, :to => :view do
+      if_attribute :Published => is { true }
+    end
+    has_permission_on :site_contents, :to => :comment do
+      if_attribute :AnonymousComments => true
+    end
+
+    has_permission_on [:posts, :projects], :to => :index
+    has_permission_on [:posts, :projects], :to => :view do
+      if_permitted_to :view, :SiteContent
+    end    
   end  
 end
 

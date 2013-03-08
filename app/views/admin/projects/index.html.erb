@@ -2,7 +2,7 @@
 	<header>
 		<h3><%= @projects.nil? ? "0" : @projects.length.to_s %> Project(s)</h3>
 	</header>
-	<div>
+	<div class="module_content">
 		<table cellspacing="0" class="tablesorter">
 			<thead>
 				<tr>
@@ -14,7 +14,7 @@
 			<tbody>
 				<% @projects.each do |project| %>
 					<tr>
-						<td><%= project.Name %></td>
+						<td><%= project.Title %></td>
 						<td>
 							<% if project.GithubAuth.nil? %>
 								<label style="color:orange">Never Synced</label>
@@ -23,7 +23,7 @@
 							<% end %>
 						</td>
 						<td>
-							<%= link_to "View", admin_project_path(project) %>
+							<%= link_to "View", project %>
 							<%= link_to "Edit", edit_admin_project_path(project) %>
 						</td>
 					</tr>

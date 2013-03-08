@@ -1,32 +1,58 @@
-<div id="category_info_wrap">
-	<p>
-	  	<b>Name:</b>
-		<%= @category.Name %>
-	</p>
-	<p>
-	  	<b>Description:</b>
-	  	<%= raw(@category.Description) %>
-	</p>
-</div>
-<div id="category_content_wrap">
-	<% @cContents = @category.Contents %>
-	<h4>Listing <%= @cContents.nil? ? "0" : @cContents.length.to_s %> elements for <%= @category.Name %></h4>
-	<table id="category_content_table">
-		<thead>
-			<tr>
-				<th>Type</th>
-				<th>Posted</th>
-				<th>Options</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @cContents.each do |cContent| %>
-				<tr>
-					<td><%= cContent.class.to_s %></td>
-					<td><%= cContent.created_at.to_s(:date_full) %></td>
-					<td><%= link_to "View", cContent %></td>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
-</div>
+<h2>
+	<%= @category.SiteContents.empty? ? "0" : @category.SiteContents.size.to_s %> items in Category: <%= @category.Name %>
+</h2>
+<article class="post">
+	<blockquote id="category_description">
+		<% if @category.Description.nil? %>
+			<p>No Description Available available</p>
+		<% else %>
+			<%= raw(@category.Description) %>
+		<% end %>
+	</blockquote>
+</article>
+<section id="show_category_section">
+	<% contents = SiteContent.where({:category_id  => @category.id}).page(params[:category_page]).per(5) %>
+	<% contents.each do |aContent| %>
+		<article class="post">
+			<header>
+				<h3>
+					<%= aContent.Content.Title %>
+					<font style="font-size: 12px ; color: gray">[<%= aContent.content_type %>]</font>
+				</h3>
+				<p class="content_info">
+					Published on <time><%= aContent.Content.updated_at.to_s(:date_medium) %></time> by 
+					<span class="author">
+						<% if aContent.CreatedBy.nil? %>
+							<font style="font-style: italic ; color: orange">Unknown</font>
+						<% else %>
+							<%= link_to aContent.CreatedBy.username, aContent.CreatedBy %>
+						<% end %>
+					</span> in 
+					<%= link_to aContent.Category.Name, aContent.Category %>
+				</p>
+			</header>
+			<p class="content_description">
+				<% stripped = strip_tags((aContent.content_type == Project.to_s ? aContent.Content.Description : aContent.Content.Body)) %>
+    			<% if !stripped.nil? && stripped.length >= 350 %>
+    				<%= stripped[0..350] + "..." %>
+    			<% else %>
+    				<%= stripped %>
+    			<% end %>
+			</p>
+			<footer>
+				<span class="left_align">
+					<% tag_links = aContent.Tags.collect{ |aTag| link_to(aTag.Name, aTag) } %>
+					Tags: <%= raw(tag_links.join(", ")) %>
+				</span>
+				<span class="right_align">
+					<%= link_to "View Full " + aContent.content_type, aContent.Content %>
+				</span>
+				<br class="clear_both" />
+			</footer>
+		</article>
+	<% end %>
+	<div id="archive_pager">
+		<%= paginate contents, :param_name => :category_page %>	
+	</div>
+	<div class="clear"></div>
+</section>

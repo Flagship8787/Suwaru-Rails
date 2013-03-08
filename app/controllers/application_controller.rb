@@ -5,9 +5,9 @@ class ApplicationController < ActionController::Base
   before_filter { |c| Authorization.current_user = c.current_user }
 
   layout :layout_by_resource
+  
   def layout_by_resource
-    #return "application" if !request.xhr?
-    return "suwaru" if !request.xhr?
+    return "application" if !request.xhr?
     return ((params.key?(:overlay) && params[:overlay].to_i == 1) ? "overlay" : false)
   end
 

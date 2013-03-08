@@ -1,13 +1,14 @@
 <article class="module width_full">
 	<header><h3>Listing <%= @posts.nil? ? "0" : @posts.length.to_s %> Posts</h3></header>
-	<div>
+	<div class="module_content">
 		<table class="tablesorter" cellspacing="0">
 			<thead>
 				<tr>
 					<th>Title</th>
-					<th>Poster</th>
 					<th>Category</th>
+					<th>Poster</th>
 					<th>Comments</th>
+					<th>Published?</th>
 					<th>Options</th>
 				</tr>
 			</thead>
@@ -15,13 +16,20 @@
 				<% @posts.each do |aPost| %>
 					<tr>
 						<td><%= aPost.Title %></td>
-						<td><%= aPost.Category.nil? ? "NIL!" : aPost.Category.Name %></td>
-						<td><%= aPost.CreatedBy.nil? ? "NIL!" : aPost.CreatedBy.username %></td>
-						<td><%= aPost.Comments.empty? ? "0" : aPost.Comments.size.to_s %></td>
+						<td><%= aPost.SiteContent.Category.nil? ? "NIL!" : aPost.SiteContent.Category.Name %></td>
+						<td><%= aPost.SiteContent.CreatedBy.nil? ? "NIL!" : aPost.SiteContent.CreatedBy.username %></td>
+						<td><%= aPost.SiteContent.Comments.empty? ? "0" : aPost.SiteContent.Comments.size.to_s %></td>
+						<td>
+							<% if !aPost.SiteContent.Published %>
+								<label style="color:red">NO</label>
+							<% else %>
+								<label style="color:green">YES</label>
+							<% end %>
+						</td>
 						<td>
 							<%= link_to "View", aPost %>
-							<%= link_to "Edit", edit_admin_post_path(aPost) %>
-							<%= link_to "Destroy", "#" %>
+							<%= link_to "Edit",  edit_admin_post_path(aPost) %>
+							<%= link_to "Destroy", admin_post_path(aPost), :confirm => "Are you sure?", :method => :delete %>
 						</td>
 					</tr>
 				<% end %>

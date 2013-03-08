@@ -1,1 +1,47 @@
-<h1>Workshop</h1>
+<section id="workshop_section">
+	<% @projects.each do |project| %>
+		<article class="post">
+			<header>
+				<h3><%= project.Title %></h3>
+				<p class="projectinfo">
+					Published on <time><%= project.updated_at.to_s(:date_medium) %></time> by 
+					<span class="author">
+						<% if project.SiteContent.CreatedBy.nil? %>
+							<font style="font-style: italic ; color: orange">Unknown</font>
+						<% else %>
+							<%= link_to project.SiteContent.CreatedBy.username, project.SiteContent.CreatedBy %>
+						<% end %>
+					</span> in 
+					<%= link_to project.SiteContent.Category.Name, project.SiteContent.Category %>
+				</p>
+			</header>
+			<p class="project_content">
+				<% stripped = strip_tags(project.Description) %>
+    			<% if !stripped.nil? && stripped.length >= 350 %>
+    				<%= stripped[0..350] + "..." %>
+    			<% else %>
+    				<%= stripped %>
+    			<% end %>
+			</p>
+			<footer>
+				<span class="left_align">
+					<% tag_links = project.SiteContent.Tags.collect{ |aTag| link_to(aTag.Name, aTag) } %>
+					Tags: <%= raw(tag_links.join(", ")) %>
+				</span>
+				<span class="right_align">
+					<%= link_to "View Full Project", project %>
+				</span>
+				<br class="clear_both" />
+			</footer>
+		</article>
+	<% end %>
+	<div id="blog_projects_pager">
+		<%= paginate @projects, :param_name => :blog_page %>	
+	</div>
+	<!--
+	<div class="wp-pagenavi">
+		<span class="current">1</span><a href="/page/2/" title="2">2</a><a href="/page/3/" title="3">3</a><a href="/page/4/" title="4">4</a><a href="/page/5/" title="5">5</a><a href="/page/6/" title="6">6</a><a href="/page/7/" title="7">7</a><a href="/page/8/" title="8">8</a><a href="/page/2/">Next &raquo;</a><span class="extend">...</span><a href="/page/27/" title="Last &raquo;">Last &raquo;</a>
+	</div>
+	-->
+	<div class="clear"></div>
+</section>

@@ -1,50 +1,31 @@
-<%= render :partial => "projects/show/assets/styles" %>
-<%= render :partial => "projects/show/assets/scripts" %>
-<header id="project_header">
-	<h2 id="project_name"><%= @project.Name %></h2>
-	<span id="project_header_info">
-		<span class="left_align">
-			<label>Last Updated: </label><%= @project.updated_at.to_s(:date_time_12_full) %>
-		</span>
-		<span class="right_align">
-			Some more detail stuff
-		</span>
-		<br class="clear_both" />
+<%= render "projects/show/assets/styles" %>
+<%= render "projects/show/assets/scripts" %>
+<section id="normalheader">
+
+</section>
+<h2 id="project_title">
+	<%= @project.Title %>
+	<span class="right_align">
+		<%= flag_link_for @project %>
 	</span>
-</header>
+	<br />
+	<small style="font-size: 11px ; color: gray">
+		Posted By 
+		<% if @project.SiteContent.CreatedBy.nil? %>
+			<span style="color:orange ; font-style:italic">Unknown</span>
+		<% else %>
+			<%= link_to @project.SiteContent.CreatedBy.username, @project.SiteContent.CreatedBy %>
+		<% end %>
+		On <%= @project.created_at.to_s(:date_full) %> In 
+		<%= link_to @project.SiteContent.Category.Name, @project.SiteContent.Category.Name %>
+	</small>
+</h2>
 <% if !@project.GithubAttributes.nil? && @project.GithubAttributes.private == false %>
 	<%= render "projects/show/github/attributes" %>
 <% end %>
-<article id="project_description">
+<section id="article_body_wrap">
 	<%= raw(@project.Description) %>
-</article>
-<hr id="comment_section_divider" />
-<% @parent = @project %>
+</section>
+<hr id="divider" />
+<% @parent = @project.SiteContent %>
 <%= render "comments/index/index"  %>
-
-<!--
-<% if !@project.GithubAttributes.nil? %>
-	<article id="project_github_attributes">
-		<ul>
-			<% @project.GithubAttributes.each_pair do |aKey, aValue| %>
-				<li>
-					<% if aValue.class == Hashie::Mash %>
-						<h4><%= aKey %></h4>
-						<ul>
-							<% aValue.each_pair do |bKey, bValue| %>
-								<li>
-									<label><%= bKey %></label><br />
-									<span><%= bValue.to_s %></span>
-								</li>
-							<% end %>
-						</ul>
-					<% else %>
-						<label><%= aKey %></label><br />
-						<span><%= aValue.to_s %></span>
-					<% end %>
-				</li>
-			<% end %>
-		</ul>
-	</article>
-<% end %>
--->

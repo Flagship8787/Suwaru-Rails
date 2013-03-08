@@ -1,8 +1,8 @@
 Suwaru::Application.routes.draw do
   
-  resources :site_contents
+  resources :pages
 
-  resources :articles
+  resources :site_contents
 
   resources :flags
 
@@ -25,12 +25,6 @@ Suwaru::Application.routes.draw do
   resources :posts,             :only => [:show]
   resources :articles,          :only => [:index, :show]
 
-=begin  
-  resources :articles, :only => [:index, :show] do
-    get 'comment', :on => :member
-  end
-=end
-
 =begin
  # => Devise Routes 
 =end
@@ -49,8 +43,11 @@ Suwaru::Application.routes.draw do
 =begin
  # => Single route mapping 
 =end
-  match "blog" => "system#blog", :as => "blog"
-  match "workshop" => "system#workshop", :as => "workshop"
+  match "blog" => "posts#index", :as => "blog"
+  match "workshop" => "projects#index", :as => "workshop"
+  match "archive" => "system#archive", :as => "archive"
+  match "about_us" => "system#about_us", :as => "about_us"
+  match "contact_us" => "system#contact_us", :as => "contact_us"
   
 =begin
   # => Admin routes
@@ -64,6 +61,11 @@ Suwaru::Application.routes.draw do
   namespace :admin do
     root :to => "system#dashboard"
     
+    match "dashboard" => "system#dashboard", :as => :dashboard
+    match "upload_file" => "system#upload_file", :as => :upload_file 
+    
+    match "receive_upload" => "site_contents#receive_upload", :as => :receive_upload
+
     resources :users
     resources :roles
     
@@ -75,7 +77,7 @@ Suwaru::Application.routes.draw do
     
     resources :projects
     resources :posts
-    resources :articles
+    resources :pages
     resources :comments  
     
     resources :contact_forms

@@ -1,7 +1,6 @@
-<%= render "comments/form/assets/styles" %>
-<%= render "comments/form/assets/scripts" %>
-<%= form_for(@comment, :remote => true, :html => {:id => "ajax_comment_form"}) do |f| %>
-	<div id="comment_form_content">
+<section id="comment_form_wrap">
+	<h3 id="respond">Leave a Reply</h3>
+	<%= form_for(@comment, :html => {:id => "commentform"} ) do |f| %>
 		<% if @comment.errors.any? %>
 	    	<div id="error_explanation">
 				<h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -14,14 +13,20 @@
 	  	<% end %>
 		<%= f.hidden_field :parent_id %>
 		<%= f.hidden_field :parent_type %>
-		<%= f.hidden_field :created_by_id %>
+		<%= f.hidden_field :poster_id, :value => (current_user ? current_user.id : nil) %>
+		<p>
+			<small>
+				<strong>XHTML:</strong> You can use these tags:....
+			</small>
+	   	</p>
 		<div class="field">
-			<%= f.text_area :Body %>
-	  	</div>
-	</div>
-  	<div id="comment_form_actions" class="actions ui-corner-br ui-corner-bl ui-widget-header">
-		<button id="cancel_form_button" class="left_align">Cancel</button>
-		<%= f.submit "Save Comment", :class => "right_align" %>
-		<br class="clear_both" />
-  	</div>
-<% end %>
+			<p class="text-area">
+				<%= f.text_area :Body %>
+			</p>
+		</div>
+		<div class="actions">
+			<%= f.submit "Save", {:type => "image", :tabindex => "5", :src => "/frameworks/silverblog/images/submit.png"} %>
+		</div>
+	<% end %>
+	<div class="clear"></div>
+</section>

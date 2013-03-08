@@ -4,7 +4,9 @@
 			<header>
 				<h3><%= post.Title %></h3>
 				<p class="postinfo">
-					Published on <time><%= post.updated_at.to_s(:date_medium) %></time> by <span class="author"><%= link_to post.CreatedBy.username, post.CreatedBy %></span> in 
+					Published on <time><%= post.updated_at.to_s(:date_medium) %></time> by 
+					<span class="author"><%= link_to post.SiteContent.CreatedBy.username, post.SiteContent.CreatedBy %></span> in 
+					<%= link_to post.SiteContent.Category.Name, post.SiteContent.Category %>
 				</p>
 			</header>
 			<p class="post_content">
@@ -17,8 +19,8 @@
 			</p>
 			<footer>
 				<span class="left_align">
-					Categories: <% categories = post.ContentCategories.collect{ |cCategory| link_to(cCategory.Category.Name, cCategory.Category)  } %>
-					<%= raw(categories.join(", ")) %>
+					<% tag_links = post.SiteContent.Tags.collect{ |aTag| link_to(aTag.Name, aTag) } %>
+					Tags: <%= raw(tag_links.join(", ")) %>
 				</span>
 				<span class="right_align">
 					<%= link_to "Read Full Post", post %>

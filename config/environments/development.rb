@@ -48,5 +48,7 @@ Suwaru::Application.configure do
   INSTALLER_TYPES_DIR = File.expand_path(File.join(__FILE__, "../", "../../lib/install/types/"))
   
   DECL_AUTH_HOME      = File.expand_path(File.join(__FILE__, "../", "../../vendor/bundle/ruby/1.8/gems/declarative_authorization-0.5.5"))
+
+  UPLOAD_FILE_DIR     = File.expand_path(File.join(__FILE__, "../../../", "uploaded_files"));
 end
 

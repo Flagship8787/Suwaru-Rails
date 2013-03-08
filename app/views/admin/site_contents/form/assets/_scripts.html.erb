@@ -1,0 +1,46 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".uploadify-field").each(function(){
+			uploadify_element($(this));	
+		})
+	});
+
+	function uploadify_element(anElement){
+		var wrap = $(anElement).parent("div").parent("div");
+
+		var type = $(wrap).find(".upload_param").attr("value");
+		var atts = $(anElement).parent("div").next("div").find(".image_attributes").first();
+		var img  = $(anElement).parent("div").find(".uploadify-field-image").first();
+
+		$(anElement).uploadify({
+			height: 30,
+			swf: "/frameworks/jQueryUI/extensions/uploadify/uploadify.swf",
+			uploader: "<%= admin_receive_upload_path %>",
+			width: 120,
+			buttonText: "Upload Image",
+			formData: {
+				"type": type
+			},
+			onUploadComplete : function(file) {
+            	//alert('The file ' + file.name + ' finished processing.');
+        	},
+        	onUploadSuccess : function(file, data, response) {
+            	//alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
+
+            	var responseJSON = jQuery.parseJSON(data);
+
+            	//alert("File name's " + responseJSON.file_name);
+
+            	$(atts).find(".uploadify_file_name").first().text(responseJSON.file_name);
+            	$(atts).find(".uploadify_file_size").first().text(responseJSON.file_size);
+            	$(atts).find(".uploadify_file_uploaded").first().text(responseJSON.file_uploaded);
+
+            	$(img).attr("src", responseJSON.file_url);
+
+            	$(wrap).find(".uploadify_file_name_field").first().attr("value", responseJSON.file_name);
+            	$(wrap).find(".uploadify_file_size_field").first().attr("value", responseJSON.file_size);
+            	$(wrap).find(".uploadify_file_uploaded_field").first().attr("value", responseJSON.file_uploaded);
+        	} 
+		});
+	}
+</script>

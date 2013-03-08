@@ -14,10 +14,10 @@
 		</article>
 		<article class="comment_posting_info">
 			Posted by 
-			<% if comment.CreatedBy.nil? %>
+			<% if comment.Poster.nil? %>
 				<span style="color:gray ; font-style: italic"Anonymous</span>
 			<% else %>
-				<%= link_to comment.CreatedBy.username, comment.CreatedBy %>
+				<%= link_to comment.Poster.username, comment.Poster %>
 			<% end %>
 		 	On <%= comment.created_at.to_s(:date_time_12_full) %>
 		</article>

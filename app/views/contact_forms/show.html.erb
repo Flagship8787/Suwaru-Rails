@@ -1,6 +1,3 @@
-<!--
-	<%= render "contact_forms/ajax/show" %>
--->
 <section id="normalheader" class="header2">
 
 </section>
@@ -9,8 +6,10 @@
 	<span id="contact_form_description">
 		<%= raw(@contact_form.Description) %>
 	</span>
-	<%= render "contact_messages/form/assets/styles" %>
-	<%= render "contact_messages/form/assets/scripts" %>
+	<div class="clear"></div>
+</article>
+<section id="contact_message_form_section">
+	<% @contact_message = ContactMessage.new({:contact_form_id => @contact_form.id}) %>
 	<%= form_for(@contact_message, :html => {:class => "form"}) do |f| %>
 		<% if @contact_message.errors.any? %>
 			<div id="error_explanation">
@@ -31,18 +30,21 @@
 	    		</label>
 	    	</p>
 	  	</div>
+	  	<p>
+       		<small>
+       			<strong>XHTML:</strong> You can use these tags:....
+       		</small>
+   		</p>
 	  	<div class="field">
 	  		<p class="text-area">
 	    		<%= f.text_area :Body %>
 	    	</p>
 	  	</div>
 	  	<div class="actions">
-	    	<%= f.submit %>
+	    	<%= f.submit "Send Message", {:type => "image", :tabindex => "5", :src => "/frameworks/silverblog/images/submit.png"} %>
 	  	</div>
 	<% end %>
-	<div class="clear"></div>
-</article>
-
+</section>
 
 <!--
 	<form action="#" method="post" class="form">

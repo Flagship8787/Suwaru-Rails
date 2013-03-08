@@ -10,14 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120709023541) do
-
-  create_table "articles", :force => true do |t|
-    t.string   "Title"
-    t.text     "Body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20130120145453) do
 
   create_table "authentications", :force => true do |t|
     t.string   "type"
@@ -97,6 +90,13 @@ ActiveRecord::Schema.define(:version => 20120709023541) do
     t.datetime "updated_at"
   end
 
+  create_table "pages", :force => true do |t|
+    t.string   "Title"
+    t.text     "Body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "posts", :force => true do |t|
     t.string   "Title"
     t.text     "Body"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(:version => 20120709023541) do
   end
 
   create_table "projects", :force => true do |t|
-    t.string   "Name"
+    t.string   "Title"
     t.text     "Description"
     t.integer  "github_auth_id"
     t.integer  "GithubId"
@@ -125,15 +125,23 @@ ActiveRecord::Schema.define(:version => 20120709023541) do
   create_table "site_contents", :force => true do |t|
     t.integer  "content_id"
     t.string   "content_type"
-    t.integer  "category_id"
     t.integer  "created_by_id"
     t.integer  "modified_by_id"
     t.integer  "published_by_id"
-    t.datetime "Published"
-    t.boolean  "AllowComments",   :default => true
-    t.boolean  "ApproveComments", :default => true
-    t.integer  "CommentDepth",    :default => 2
-    t.integer  "MaxFlags",        :default => 10
+    t.integer  "category_id"
+    t.string   "Banner_file_name"
+    t.integer  "Banner_file_size"
+    t.datetime "Banner_updated_at"
+    t.string   "Thumb_file_name"
+    t.integer  "Thumb_file_size"
+    t.datetime "Thumb_updated_at"
+    t.boolean  "Published",         :default => false
+    t.datetime "PublishedAt"
+    t.boolean  "isFeatured",        :default => false
+    t.boolean  "AllowComments",     :default => true
+    t.boolean  "AnonymousComments", :default => true
+    t.boolean  "ApproveComments",   :default => true
+    t.integer  "CommentDepth",      :default => 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -4,18 +4,14 @@
 		<p>
 			SilverBlog is a free CSS Template released under GNU GPL license. You are free to use / modify it in any way you want without any restrictions.  A link back to this website will always be appreciated. <a href="#">Read More</a>
 		</p>
+		<h2>Latest Stuff <%= link_to "Archive", archive_path, :style => "font-size: 11px" %></h2>
+		<ul>
+			<% SiteContent.all.each do |site_content| %>
+				<li><%= link_to site_content.Content.Title, site_content.Content %></li>
+			<% end %>
+		</ul>
 		<h2>Categories</h2>
 		<ul>
-			<!--
-			<li><a href="#">Web Design</a>(4)</li>
-			<li><a href="#">Graphics Design</a>(8)</li>
-			<li><a href="#">Computers</a>(12)</li>
-			<li><a href="#">Typography</a>(3)</li>
-			<li><a href="#">Photogrphy</a>(4)</li>
-			<li><a href="#">Mathematics</a>(5)</li>
-			<li><a href="#">General News</a>(24)</li>
-			<li><a href="#">Music and Entertainment</a>(1)</li>
-			-->
 			<% categories = Category.order("categories.Name ASC") %>
 			<% categories.each do |aCategory| %>
 				<li>
@@ -23,17 +19,6 @@
 					<%= (aCategory.SiteContents.empty? ? "(0)" : "(" + aCategory.SiteContents.size.to_s + ")") %>
 				</li>
 			<% end %>
-		</ul>
-		<h2>Latest Posts</h2>
-		<ul>
-			<li><a href="#">Web Design</a></li>
-			<li><a href="#">Graphics Design</a></li>
-			<li><a href="#">Computers</a></li>
-			<li><a href="#">Typography</a></li>
-			<li><a href="#">Photogrphy</a></li>
-			<li><a href="#">Mathematics</a></li>
-			<li><a href="#">General News</a></li>
-			<li><a href="#">Music and Entertainment</a></li>
 		</ul>
 	</div>
 </section>

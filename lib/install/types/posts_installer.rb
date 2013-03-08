@@ -21,28 +21,13 @@ class PostsInstaller
       aPost.Title = post_obj["title"]
       aPost.Body  = post_obj.at_css("body").content
       
-      aPost.CreatedBy = User.find_by_username(post_obj["created_by"])
-      aPost.ModifiedBy = User.find_by_username(post_obj["modified_by"])
-      
       aPost.tag_names = post_obj["tag_names"]
-      aPost.category_names = post_obj["category_names"]
+      aPost.category_name = post_obj["category_name"]
       
-=begin      
-      cat_str = post_obj["category"]
-      aCategory = nil
+      aPost.SiteContent = SiteContent.new({:content_type => aPost.class.to_s})
+      aPost.SiteContent.CreatedBy = User.find_by_username(post_obj["created_by"])
+      aPost.SiteContent.ModifiedBy = User.find_by_username(post_obj["modified_by"])
       
-      if(cat_str.nil? || cat_str.length <= 0)
-        aCategory = Category.find_or_create_by_Name("Miscellaneous")
-      else
-        aCategory = Category.find_or_create_by_Name(cat_str)
-      end
-      
-      if aPost.ContentCategory.nil?
-        aPost.ContentCategory = ContentCategory.new({:Content => self})
-      end
-      
-      aPost.ContentCategory.Category = aCategory
-=end
       if aPost.save
         count += 1
         puts "Successfully installed post: " + aPost.Title + "."
@@ -54,8 +39,8 @@ class PostsInstaller
           comment_objs.each do |comment_obj|
             aComment            = Comment.new
             
-            aComment.Parent     = aPost
-            aComment.CreatedBy  = User.find_by_username(comment_obj["created_by"])
+            aComment.Parent     = aPost.SiteContent
+            aComment.Poster     = User.find_by_username(comment_obj["poster"])
             aComment.Body       = comment_obj.content
             
             cCount += 1 if aComment.save
@@ -65,8 +50,6 @@ class PostsInstaller
       end
     end
     
-    puts "Posts Installer successfully created " + count.to_s + " of " + post_objs.length.to_s + " posts." 
-    
-    return (count == post_objs.length)
+    return (count == post_objs.length ? true : false)
   end
 end

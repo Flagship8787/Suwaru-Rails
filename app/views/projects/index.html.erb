@@ -1,26 +1,18 @@
-<style type="text/css">
-	#projects_index_banner{
-		border-bottom: none;
-		font-size: 24px;
-		line-height: 32px
-	}
-</style>
-<h2 id="projects_index_banner">Listing <%= @projects.nil? ? "0" : @projects.length.to_s %> projects</h2>
-<div id="projects_index_list">
-	<% @projects.each do |project| %>
-		<div class="project_wrap">
-			<h3><%= link_to project.Name, project %></h3>
-			Created by <%= link_to project.CreatedBy.username, project.CreatedBy %>
-			<div class="project_description">
-				<p>
-					<% stripped = strip_tags(project.Description) %>
-					<% if stripped.length > 300 %>
-						<%= stripped[0..300] + "..." %>
-					<% else %>
-						<%= stripped %>
-					<% end %>
-				</p>
-			</div>
+<section id="workshop_section">
+	<% if @contents.nil? || @contents.count <= 0 %>
+		<h3 style="color: orange">There are no projects currently in the works.  Please check back later</h3>
+	<% else %>
+		<% @contents.each do |content| %>
+			<%= render :partial => "projects/partials/preview", :locals => {:project => content.Content} %>
+		<% end %>
+		<div id="blog_projects_pager">
+			<%= paginate @contents, :param_name => :wpage %>	
 		</div>
 	<% end %>
-</div>
+	<!--
+	<div class="wp-pagenavi">
+		<span class="current">1</span><a href="/page/2/" title="2">2</a><a href="/page/3/" title="3">3</a><a href="/page/4/" title="4">4</a><a href="/page/5/" title="5">5</a><a href="/page/6/" title="6">6</a><a href="/page/7/" title="7">7</a><a href="/page/8/" title="8">8</a><a href="/page/2/">Next &raquo;</a><span class="extend">...</span><a href="/page/27/" title="Last &raquo;">Last &raquo;</a>
+	</div>
+	-->
+	<div class="clear"></div>
+</section>

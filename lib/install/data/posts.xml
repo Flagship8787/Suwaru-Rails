@@ -1,5 +1,5 @@
 <posts-list>
-	<post title="Hello World" created_by="Flagship8787" modified_by="Flagship8787" category_names="Development Aikido Politics Technology" tag_names="test tags for testing">
+	<post title="Hello World" created_by="Flagship8787" modified_by="Flagship8787" category_name="Aikido" tag_names="test tags for testing">
 		<body>
 			<![CDATA[
 				<p>
@@ -20,7 +20,7 @@
 			]]>
 		</body>
 		<comments>
-			<comment created_by="admin_1">
+			<comment poster="admin_1">
 				<![CDATA[
 					<p>
 					Suspendisse mi augue, euismod id consequat rhoncus, pellentesque a ipsum. Nullam urna augue, sagittis eu fringilla at, fringilla non purus. In sodales volutpat dignissim. Praesent purus magna, elementum ac posuere eu, dignissim at lacus. Morbi sit amet metus dui, sit amet hendrerit nunc. Ut ante nisl, auctor quis condimentum non, dapibus eu lacus. Aliquam sed sapien a arcu semper posuere sit amet a lectus. Suspendisse sed orci sem.
@@ -30,7 +30,7 @@
 					</p>
 				]]>
 			</comment>
-			<comment created_by="visitor_1">
+			<comment poster="visitor_1">
 				<![CDATA[
 					<p>
 					Suspendisse mi augue, euismod id consequat rhoncus, pellentesque a ipsum. Nullam urna augue, sagittis eu fringilla at, fringilla non purus. In sodales volutpat dignissim. Praesent purus magna, elementum ac posuere eu, dignissim at lacus. Morbi sit amet metus dui, sit amet hendrerit nunc. Ut ante nisl, auctor quis condimentum non, dapibus eu lacus. Aliquam sed sapien a arcu semper posuere sit amet a lectus. Suspendisse sed orci sem.
@@ -40,7 +40,7 @@
 					</p>
 				]]>
 			</comment>
-			<comment created_by="visitor_2">
+			<comment poster="visitor_2">
 				<![CDATA[
 					<p>
 					Suspendisse mi augue, euismod id consequat rhoncus, pellentesque a ipsum. Nullam urna augue, sagittis eu fringilla at, fringilla non purus. In sodales volutpat dignissim. Praesent purus magna, elementum ac posuere eu, dignissim at lacus. Morbi sit amet metus dui, sit amet hendrerit nunc. Ut ante nisl, auctor quis condimentum non, dapibus eu lacus. Aliquam sed sapien a arcu semper posuere sit amet a lectus. Suspendisse sed orci sem.
@@ -50,7 +50,7 @@
 					</p>
 				]]>
 			</comment>
-			<comment created_by="visitor_2">
+			<comment poster="visitor_2">
 				<![CDATA[
 					<p>
 					Suspendisse mi augue, euismod id consequat rhoncus, pellentesque a ipsum. Nullam urna augue, sagittis eu fringilla at, fringilla non purus. In sodales volutpat dignissim. Praesent purus magna, elementum ac posuere eu, dignissim at lacus. Morbi sit amet metus dui, sit amet hendrerit nunc. Ut ante nisl, auctor quis condimentum non, dapibus eu lacus. Aliquam sed sapien a arcu semper posuere sit amet a lectus. Suspendisse sed orci sem.
@@ -62,7 +62,8 @@
 			</comment>
 		</comments>
 	</post>
-	<post title="Lorem Ipsum" created_by="Flagship8787" modified_by="Flagship8787" category_names="Development Politics" tag_names="test tags for testing">
+	<!--
+	<post title="Lorem Ipsum" created_by="Flagship8787" modified_by="Flagship8787" category_name="Politics" tag_names="test tags for testing">
 		<body>
 			<![CDATA[
 				<p>
@@ -83,7 +84,7 @@
 			]]>
 		</body>
 		<comments>
-			<comment created_by="Flagship8787">
+			<comment poster="Flagship8787">
 				<![CDATA[
 					<p>
 						男はヘリコプター水曜日から飛び出し、パラシュートを展開することなく、地球に2400フィートの減少となりました。彼は無傷されました。
@@ -151,7 +152,7 @@
 			</comment>
 		</comments>
 	</post>
-	<post title="This is my last post" created_by="Flagship8787" modified_by="Flagship8787" category_names="Development Music" tag_names="test tags for testing">
+	<post title="This is my last post" created_by="Flagship8787" modified_by="Flagship8787" category_name="Music" tag_names="test tags for testing">
 		<body>
 			<![CDATA[
 				<p>
@@ -172,7 +173,7 @@
 			]]>
 		</body>
 		<comments>
-			<comment created_by="admin_1">
+			<comment poster="admin_1">
 				<![CDATA[
 					<p>
 					Suspendisse mi augue, euismod id consequat rhoncus, pellentesque a ipsum. Nullam urna augue, sagittis eu fringilla at, fringilla non purus. In sodales volutpat dignissim. Praesent purus magna, elementum ac posuere eu, dignissim at lacus. Morbi sit amet metus dui, sit amet hendrerit nunc. Ut ante nisl, auctor quis condimentum non, dapibus eu lacus. Aliquam sed sapien a arcu semper posuere sit amet a lectus. Suspendisse sed orci sem.
@@ -182,7 +183,7 @@
 					</p>
 				]]>
 			</comment>
-			<comment created_by="visitor_1">
+			<comment poster="visitor_1">
 				<![CDATA[
 					<p>
 					Suspendisse mi augue, euismod id consequat rhoncus, pellentesque a ipsum. Nullam urna augue, sagittis eu fringilla at, fringilla non purus. In sodales volutpat dignissim. Praesent purus magna, elementum ac posuere eu, dignissim at lacus. Morbi sit amet metus dui, sit amet hendrerit nunc. Ut ante nisl, auctor quis condimentum non, dapibus eu lacus. Aliquam sed sapien a arcu semper posuere sit amet a lectus. Suspendisse sed orci sem.
@@ -194,7 +195,7 @@
 			</comment>
 		</comments>
 	</post>
-	<post title="Just Kidding.  Here's another post." created_by="Flagship8787" modified_by="Flagship8787" category_names="Development Aikido" tag_names="test tags for testing">
+	<post title="Just Kidding.  Here's another post." created_by="Flagship8787" modified_by="Flagship8787" category_name="Development" tag_names="test tags for testing">
 		<body>
 			<![CDATA[
 				<p>
@@ -215,7 +216,7 @@
 			]]>
 		</body>
 		<comments>
-			<comment created_by="admin_1">
+			<comment poster="admin_1">
 				<![CDATA[
 					<p>
 					Suspendisse mi augue, euismod id consequat rhoncus, pellentesque a ipsum. Nullam urna augue, sagittis eu fringilla at, fringilla non purus. In sodales volutpat dignissim. Praesent purus magna, elementum ac posuere eu, dignissim at lacus. Morbi sit amet metus dui, sit amet hendrerit nunc. Ut ante nisl, auctor quis condimentum non, dapibus eu lacus. Aliquam sed sapien a arcu semper posuere sit amet a lectus. Suspendisse sed orci sem.
@@ -225,7 +226,7 @@
 					</p>
 				]]>
 			</comment>
-			<comment created_by="visitor_1">
+			<comment poster="visitor_1">
 				<![CDATA[
 					<p>
 					Suspendisse mi augue, euismod id consequat rhoncus, pellentesque a ipsum. Nullam urna augue, sagittis eu fringilla at, fringilla non purus. In sodales volutpat dignissim. Praesent purus magna, elementum ac posuere eu, dignissim at lacus. Morbi sit amet metus dui, sit amet hendrerit nunc. Ut ante nisl, auctor quis condimentum non, dapibus eu lacus. Aliquam sed sapien a arcu semper posuere sit amet a lectus. Suspendisse sed orci sem.
@@ -237,7 +238,7 @@
 			</comment>
 		</comments>
 	</post>
-	<post title="Is this my last post?" created_by="Flagship8787" modified_by="Flagship8787" category_names="Development Security" tag_names="test tags for testing">
+	<post title="Is this my last post?" created_by="Flagship8787" modified_by="Flagship8787" category_name="Security" tag_names="test tags for testing">
 		<body>
 			<![CDATA[
 				<p>
@@ -258,7 +259,7 @@
 			]]>
 		</body>
 		<comments>
-			<comment created_by="visitor_1">
+			<comment poster="visitor_1">
 				<![CDATA[
 					<p>
 					Suspendisse mi augue, euismod id consequat rhoncus, pellentesque a ipsum. Nullam urna augue, sagittis eu fringilla at, fringilla non purus. In sodales volutpat dignissim. Praesent purus magna, elementum ac posuere eu, dignissim at lacus. Morbi sit amet metus dui, sit amet hendrerit nunc. Ut ante nisl, auctor quis condimentum non, dapibus eu lacus. Aliquam sed sapien a arcu semper posuere sit amet a lectus. Suspendisse sed orci sem.
@@ -268,7 +269,7 @@
 					</p>
 				]]>
 			</comment>
-			<comment created_by="visitor_2">
+			<comment poster="visitor_2">
 				<![CDATA[
 					<p>
 					Suspendisse mi augue, euismod id consequat rhoncus, pellentesque a ipsum. Nullam urna augue, sagittis eu fringilla at, fringilla non purus. In sodales volutpat dignissim. Praesent purus magna, elementum ac posuere eu, dignissim at lacus. Morbi sit amet metus dui, sit amet hendrerit nunc. Ut ante nisl, auctor quis condimentum non, dapibus eu lacus. Aliquam sed sapien a arcu semper posuere sit amet a lectus. Suspendisse sed orci sem.
@@ -280,7 +281,7 @@
 			</comment>
 		</comments>
 	</post>
-	<post title="This is my last post" created_by="Flagship8787" modified_by="Flagship8787" category_names="Development Music" tag_names="test tags for testing">
+	<post title="This is my last post" created_by="Flagship8787" modified_by="Flagship8787" category_name="Music" tag_names="test tags for testing">
 		<body>
 			<![CDATA[
 				<p>
@@ -301,7 +302,7 @@
 			]]>
 		</body>
 		<comments>
-			<comment created_by="admin_1">
+			<comment poster="admin_1">
 				<![CDATA[
 					<p>
 					Suspendisse mi augue, euismod id consequat rhoncus, pellentesque a ipsum. Nullam urna augue, sagittis eu fringilla at, fringilla non purus. In sodales volutpat dignissim. Praesent purus magna, elementum ac posuere eu, dignissim at lacus. Morbi sit amet metus dui, sit amet hendrerit nunc. Ut ante nisl, auctor quis condimentum non, dapibus eu lacus. Aliquam sed sapien a arcu semper posuere sit amet a lectus. Suspendisse sed orci sem.
@@ -311,7 +312,7 @@
 					</p>
 				]]>
 			</comment>
-			<comment created_by="visitor_1">
+			<comment poster="visitor_1">
 				<![CDATA[
 					<p>
 					Suspendisse mi augue, euismod id consequat rhoncus, pellentesque a ipsum. Nullam urna augue, sagittis eu fringilla at, fringilla non purus. In sodales volutpat dignissim. Praesent purus magna, elementum ac posuere eu, dignissim at lacus. Morbi sit amet metus dui, sit amet hendrerit nunc. Ut ante nisl, auctor quis condimentum non, dapibus eu lacus. Aliquam sed sapien a arcu semper posuere sit amet a lectus. Suspendisse sed orci sem.
@@ -323,7 +324,7 @@
 			</comment>
 		</comments>
 	</post>
-	<post title="Just Kidding.  Here's another post." created_by="Flagship8787" modified_by="Flagship8787" category_names="Development Aikido" tag_names="test tags for testing">
+	<post title="Just Kidding.  Here's another post." created_by="Flagship8787" modified_by="Flagship8787" category_name="Aikido" tag_names="test tags for testing">
 		<body>
 			<![CDATA[
 				<p>
@@ -344,7 +345,7 @@
 			]]>
 		</body>
 		<comments>
-			<comment created_by="admin_1">
+			<comment poster="admin_1">
 				<![CDATA[
 					<p>
 					Suspendisse mi augue, euismod id consequat rhoncus, pellentesque a ipsum. Nullam urna augue, sagittis eu fringilla at, fringilla non purus. In sodales volutpat dignissim. Praesent purus magna, elementum ac posuere eu, dignissim at lacus. Morbi sit amet metus dui, sit amet hendrerit nunc. Ut ante nisl, auctor quis condimentum non, dapibus eu lacus. Aliquam sed sapien a arcu semper posuere sit amet a lectus. Suspendisse sed orci sem.
@@ -354,7 +355,7 @@
 					</p>
 				]]>
 			</comment>
-			<comment created_by="visitor_1">
+			<comment poster="visitor_1">
 				<![CDATA[
 					<p>
 					Suspendisse mi augue, euismod id consequat rhoncus, pellentesque a ipsum. Nullam urna augue, sagittis eu fringilla at, fringilla non purus. In sodales volutpat dignissim. Praesent purus magna, elementum ac posuere eu, dignissim at lacus. Morbi sit amet metus dui, sit amet hendrerit nunc. Ut ante nisl, auctor quis condimentum non, dapibus eu lacus. Aliquam sed sapien a arcu semper posuere sit amet a lectus. Suspendisse sed orci sem.
@@ -366,7 +367,7 @@
 			</comment>
 		</comments>
 	</post>
-	<post title="Is this my last post?" created_by="Flagship8787" modified_by="Flagship8787" category_names="Development Security" tag_names="test tags for testing">
+	<post title="Is this my last post?" created_by="Flagship8787" modified_by="Flagship8787" category_name="Development" tag_names="test tags for testing">
 		<body>
 			<![CDATA[
 				<p>
@@ -387,7 +388,7 @@
 			]]>
 		</body>
 		<comments>
-			<comment created_by="visitor_1">
+			<comment poster="visitor_1">
 				<![CDATA[
 					<p>
 					Suspendisse mi augue, euismod id consequat rhoncus, pellentesque a ipsum. Nullam urna augue, sagittis eu fringilla at, fringilla non purus. In sodales volutpat dignissim. Praesent purus magna, elementum ac posuere eu, dignissim at lacus. Morbi sit amet metus dui, sit amet hendrerit nunc. Ut ante nisl, auctor quis condimentum non, dapibus eu lacus. Aliquam sed sapien a arcu semper posuere sit amet a lectus. Suspendisse sed orci sem.
@@ -397,7 +398,7 @@
 					</p>
 				]]>
 			</comment>
-			<comment created_by="visitor_2">
+			<comment poster="visitor_2">
 				<![CDATA[
 					<p>
 					Suspendisse mi augue, euismod id consequat rhoncus, pellentesque a ipsum. Nullam urna augue, sagittis eu fringilla at, fringilla non purus. In sodales volutpat dignissim. Praesent purus magna, elementum ac posuere eu, dignissim at lacus. Morbi sit amet metus dui, sit amet hendrerit nunc. Ut ante nisl, auctor quis condimentum non, dapibus eu lacus. Aliquam sed sapien a arcu semper posuere sit amet a lectus. Suspendisse sed orci sem.
@@ -409,4 +410,5 @@
 			</comment>
 		</comments>
 	</post>
+	-->
 </posts-list>

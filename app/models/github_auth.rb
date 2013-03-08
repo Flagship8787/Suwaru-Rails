@@ -48,16 +48,8 @@ class GithubAuth < Authentication
     aRepo = self.GituhubRepoWithId(repo_id)
     return false if aRepo.nil?
 
-    aProject                  = Project.find_or_create_by_github_auth_id_and_GithubId(self.id, aRepo.id)
-    
-    aProject.Name             = aRepo.name        if aProject.Name.nil?
-    aProject.Description      = aRepo.description if aProject.Description.nil?
-
-    aProject.GithubAttributes = aRepo
-
-    aProject.GithubSynced     = Time.now
-    
-    return aProject.save
+    aProject = Project.find_or_create_by_github_auth_id_and_GithubId(self.id, aRepo.id)
+    return aProject.SyncWithRepo(aRepo)
   end
   def SyncRepos
     allRepos = self.AllGithubRepos
@@ -65,16 +57,8 @@ class GithubAuth < Authentication
     
     count = 0 
     allRepos.list_repos do |aRepo|
-      aProject                  = Project.find_or_create_by_github_auth_id_and_GithubId(self.id, aRepo.id)
-
-      aProject.Name             = aRepo.name        if aProject.Name.nil?
-      aProject.Description      = aRepo.description if aProject.Description.nil?
-
-      aProject.GithubAttributes = aRepo
-
-      aProject.GithubSynced     = Time.now
-
-      count += 1 if aProject.save
+      aProject = Project.find_or_create_by_github_auth_id_and_GithubId(self.id, aRepo.id)
+      count += 1 if aProject.SyncWithRepo(aRepo)
     end
     
     return (count == allRepos.repos.length ? true : false)

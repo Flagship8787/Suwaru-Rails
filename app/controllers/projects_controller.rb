@@ -1,8 +1,11 @@
 class ProjectsController < ApplicationController
+
+  filter_resource_access
+
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = Project.all
+    @contents = SiteContent.with_permissions_to(:read).where(:content_type => Project.to_s).page(params[:wpage]).per(5)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +17,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1.xml
   def show
     @project = Project.find(params[:id])
+
+    #raise ActionController::RoutingError.new("Record Not Found") if @project.SiteContent.Published.nil?
 
     respond_to do |format|
       format.html # show.html.erb

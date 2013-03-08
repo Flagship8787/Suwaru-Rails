@@ -50,4 +50,18 @@ module ApplicationHelper
       '</a>'
     )
   end
+  def nav_link_for( link_text, link_dest )
+    link_open = nil
+    
+    puts "Request path = " + request.path
+    puts "Link dest = " + link_dest
+    
+    if request.path == link_dest 
+      link_open = '<li class="current">'
+    else
+      link_open = '<li>'
+    end
+    
+    return raw(link_open + link_to(link_text, link_dest) + '</li>' )
+  end
 end

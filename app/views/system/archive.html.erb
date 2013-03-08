@@ -1,0 +1,45 @@
+<section id="archive_section">
+	<% @contents.each do |aContent| %>
+		<article class="post">
+			<header>
+				<h3>
+					<%= aContent.Content.Title %>
+					<font style="font-size: 12px ; color: gray">[<%= aContent.content_type %>]</font>
+				</h3>
+				<p class="content_info">
+					Published on <time><%= aContent.Content.updated_at.to_s(:date_medium) %></time> by 
+					<span class="author">
+						<% if aContent.CreatedBy.nil? %>
+							<font style="font-style: italic ; color: orange">Unknown</font>
+						<% else %>
+							<%= link_to aContent.CreatedBy.username, aContent.CreatedBy %>
+						<% end %>
+					</span> in 
+					<%= link_to aContent.Category.Name, aContent.Category %>
+				</p>
+			</header>
+			<p class="content_description">
+				<% stripped = strip_tags((aContent.content_type == Project.to_s ? aContent.Content.Description : aContent.Content.Body)) %>
+    			<% if !stripped.nil? && stripped.length >= 350 %>
+    				<%= stripped[0..350] + "..." %>
+    			<% else %>
+    				<%= stripped %>
+    			<% end %>
+			</p>
+			<footer>
+				<span class="left_align">
+					<% tag_links = aContent.Tags.collect{ |aTag| link_to(aTag.Name, aTag) } %>
+					Tags: <%= raw(tag_links.join(", ")) %>
+				</span>
+				<span class="right_align">
+					<%= link_to "View Full Project", aContent.Content %>
+				</span>
+				<br class="clear_both" />
+			</footer>
+		</article>
+	<% end %>
+	<div id="archive_pager">
+		<%= paginate @contents, :param_name => :archive_page %>	
+	</div>
+	<div class="clear"></div>
+</section>

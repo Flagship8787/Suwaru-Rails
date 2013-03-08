@@ -18,19 +18,38 @@ class ProjectsInstaller
     project_objs.each do |project_obj|
       aProject = Project.new
       
-      aProject.Name = project_obj["name"]
+      aProject.Title = project_obj["title"]
       aProject.Description  = project_obj.at_css("description").content
       
       aProject.tag_names = project_obj["tag_names"]
+      aProject.category_name = project_obj["category_name"]
+      
+      aProject.SiteContent = SiteContent.new({:content_type => aProject.class.to_s})
+      aProject.SiteContent.CreatedBy = User.find_by_username(project_obj["created_by"])
+      aProject.SiteContent.ModifiedBy = User.find_by_username(project_obj["modified_by"])
       
       if aProject.save
         count += 1
-        puts "Successfully installed project: " + aProject.Name + "."
+        puts "Successfully installed project: " + aProject.Title + "."
+
+        # => Now we install this post's comments      
+        comment_objs = project_obj.css("comments > comment")
+        if !comment_objs.nil? && comment_objs.length > 0
+          cCount = 0
+          comment_objs.each do |comment_obj|
+            aComment            = Comment.new
+            
+            aComment.Parent     = aProject.SiteContent
+            aComment.Poster     = User.find_by_username(comment_obj["poster"])
+            aComment.Body       = comment_obj.content
+            
+            cCount += 1 if aComment.save
+          end
+          puts "Created " + cCount.to_s + " of " + comment_objs.length.to_s + " comments for project."
+        end
       end
     end
     
-    puts "Projects Installer successfully created " + count.to_s + " of " + project_objs.length.to_s + " projects." 
-    
-    return (count == project_objs.length)
+    return (count == project_objs.length ? true : false)
   end
 end

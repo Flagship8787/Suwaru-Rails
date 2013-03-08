@@ -1,0 +1,41 @@
+checking for Ruby version >= 1.8.2... -------------------- yes
+
+--------------------
+
+find_executable: checking for Magick-config... -------------------- yes
+
+--------------------
+
+checking for ImageMagick version >= 6.3.0... -------------------- yes
+
+--------------------
+
+checking for HDRI disabled version of ImageMagick... -------------------- yes
+
+--------------------
+
+have_header: checking for sys/types.h... -------------------- yes
+
+"xcrun cc -E -I. -I/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/universal-darwin11.0 -I.     conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <sys/types.h>
+/* end */
+
+--------------------
+
+have_header: checking for magick/MagickCore.h... -------------------- no
+
+"xcrun cc -E -I. -I/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/universal-darwin11.0 -I.     conftest.c -o conftest.i"
+conftest.c:1:10: fatal error: 'magick/MagickCore.h' file not found
+#include <magick/MagickCore.h>
+         ^
+1 error generated.
+checked program was:
+/* begin */
+1: #include <magick/MagickCore.h>
+/* end */
+
+--------------------
+
+Can't install RMagick 2.0.0. Can't find MagickCore.h.

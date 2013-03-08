@@ -1,0 +1,13 @@
+<section id="blog_section">
+	<% if @contents.nil? || @contents.count <= 0 %>
+		<h3 style="color: orange">There are no posts in the blog at the moment.  Please check back later.</h3>
+	<% else %>
+		<% @contents.each do |content| %>
+			<%= render :partial => "posts/partials/preview", :locals => {:post => content.Content} %>
+		<% end %>
+		<div id="blog_posts_pager">
+			<%= paginate @contents, :param_name => :bpage %>	
+		</div>
+	<% end %>
+	<div class="clear"></div>
+</section>

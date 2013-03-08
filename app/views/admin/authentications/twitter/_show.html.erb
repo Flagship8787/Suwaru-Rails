@@ -1,5 +1,23 @@
+<style type="text/css">
+	#functionality_pending{
+		border: 1px solid green;
+		background-color:#7ce571;
+		padding: 6px 8px 6px 8px;
+		color: black;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+		margin-top: 14px;
+	}
+</style>
 <div id="twitter_authentication_wrap">
 	<%= image_tag @twitter_auth.AvatarURL, :id => "twitter_avatar_image", :class => "left_align" %>
 	<h3><%= @twitter_auth.AccountName %></h3>
 	<%= link_to "View Profile", @twitter_auth.ProfileURL, :id => "twitter_profile_link" %>
+	<br class="clear_both" />
+</div>
+<div id="functionality_pending">
+	<p>
+		Functionality's pending.  We're on it, so no worries.  The fruits are our labor shall be available soon enough.
+	</p>
 </div>

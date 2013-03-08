@@ -1,5 +1,5 @@
 <projects-list>
-	<project name="The first project" created_by="Flagship8787" tag_names="test tags for testing">
+	<project title="The first project" created_by="Flagship8787" tag_names="test tags for testing" category_name="Firstness">
 		<description>
 			<![CDATA[
 				<p>
@@ -11,7 +11,8 @@
 			]]>
 		</description>
 	</project>
-	<project name="The second project" created_by="Flagship8787" tag_names="test tags for testing">
+	<!--
+	<project title="The second project" created_by="Flagship8787" tag_names="test tags for testing" category_name="Secondness">
 		<description>
 			<![CDATA[
 				<p>
@@ -23,7 +24,7 @@
 			]]>
 		</description>
 	</project>
-	<project name="The third project" created_by="Flagship8787" tag_names="test tags for testing">
+	<project title="The third project" created_by="Flagship8787" tag_names="test tags for testing" category_name="Firstness">
 		<description>
 			<![CDATA[
 				<p>
@@ -35,4 +36,5 @@
 			]]>
 		</description>
 	</project>
+	-->
 </projects-list>

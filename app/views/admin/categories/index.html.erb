@@ -2,7 +2,7 @@
 	<header>
 		<h3><%= @categories.nil? ? "0" : @categories.length.to_s %> Categories</h3>
 	</header>
-	<div>
+	<div class="module_content">
 		<table class="tablesorter" cellspacing="0">
 			<thead>
 				<tr>
@@ -16,7 +16,7 @@
 					<tr>
 						<td><%= aCategory.Name %></td>
 						<td>
-							<% contents = aCategory.Contents %>
+							<% contents = aCategory.SiteContents %>
 							<% if !contents.nil? && (contents.length > 0) %>
 								<%= contents.length.to_s %>
 							<% else %>

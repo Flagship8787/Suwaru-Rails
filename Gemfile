@@ -2,6 +2,8 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.8'
 
+gem 'rake', '0.9.2.2'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -21,8 +23,14 @@ gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-github'
 
-gem "github_api", "~> 0.4.11"
+gem 'fb_graph'
+gem 'github_api', '~> 0.4.11'
 gem 'twitter'
+
+#gem "rmagick", "2.12.0"
+#gem "carrierwave"
+
+#gem 'rover_base_station', :require => "rover_base_station", :path => "vendor/rover_base_station"
 
 # Use unicorn as the web server
 # gem 'unicorn'

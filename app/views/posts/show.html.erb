@@ -1,46 +1,50 @@
-<%= render "posts/show/assets/styles" %>
-<%= render "posts/show/assets/scripts" %>
-<div id="post_wrap">
-	<header id="post_header">
-		<div class="post_header_section">
-			<h2 id="post_title" class="left_align"><%= @post.Title %></h2>
-			<span id="post_flag_link" class="right_align">
-				<%= flag_link_for @post %>
-			</span>
-			<br class="clear_both" />
-			<span id="post_info">
-				Posted By 
-				<% if @post.CreatedBy.nil? %>
-					<span style="color:orange ; font-style:italic">Unknown</span>
-				<% else %>
-					<%= link_to @post.CreatedBy.username, @post.CreatedBy %>
-				<% end %>
-				On <%= @post.created_at.to_s(:date_full) %>	
-			</span>
-		</div>
-		<div class="post_header_section">
-			<span id="post_categories" class="left_align">
-				Categories: 
-				<% if @post.Categories.empty? %>
-					<label style="color:gray ; font-style: italic">None</label>
-				<% else %>
-					<% post_categories = @post.Categories.collect{ |aCategory| link_to(aCategory.Name, aCategory) } %>
-					<%= raw(post_categories.join(", ")) %>
-				<% end %>
-			</span>
-			<span id="post_tags" class="right_align">
-				<label>Tags: </label>
-				<% tag_links = @post.Tags.collect{ |aTag| link_to(aTag.Name, aTag) } %>
-				<%= raw(tag_links.join(", ")) %>
-			</span>
-			<br class="clear_both" />
-		</div>
-	</header>
-	<section id="post_body_wrap">
-		<%= raw(@post.Body) %>
-	</section>
-	<hr id="divider" />
-	<% @parent = @post %>
-	<%= render "comments/index/index"  %>
-</div>
+<% if permitted_to? :view, @post %>
+	<%= render "posts/show/assets/styles" %>
+	<%= render "posts/show/assets/scripts" %>
+	<div id="post_wrap">
+		<header id="post_header">
+			<div class="post_header_section">
+				<h2 id="post_title" class="left_align"><%= @post.Title %></h2>
+				<span id="post_flag_link" class="right_align">
+					<%= flag_link_for @post %>
+				</span>
+				<br class="clear_both" />
+				<span id="post_info">
+					Posted By 
+					<% if @post.SiteContent.CreatedBy.nil? %>
+						<span style="color:orange ; font-style:italic">Unknown</span>
+					<% else %>
+						<%= link_to @post.SiteContent.CreatedBy.username, @post.SiteContent.CreatedBy %>
+					<% end %>
+					On <%= @post.created_at.to_s(:date_full) %>	
+				</span>
+			</div>
+			<div class="post_header_section">
+				<span id="post_categories" class="left_align">
+					Category 
+					<% if @post.SiteContent.Category.nil? %>
+						<label style="color:gray ; font-style: italic">None</label>
+					<% else %>
+						<%= @post.SiteContent.Category.Name %>
+					<% end %>
+				</span>
+				<span id="post_tags" class="right_align">
+					<label>Tags: </label>
+					<% tag_links = @post.SiteContent.Tags.collect{ |aTag| link_to(aTag.Name, aTag) } %>
+					<%= raw(tag_links.join(", ")) %>
+				</span>
+				<br class="clear_both" />
+			</div>
+		</header>
+		<section id="post_body_wrap">
+			<%= raw(@post.Body) %>
+		</section>
+		<% if permitted_to?(:comment, @post.SiteContent) %>
+			<% @parent = @post.SiteContent %>
+			<hr id="divider" />
+			<%= render "comments/index/index"  %>
+		<% end %>
+	</div>
+<% end %>
+
 

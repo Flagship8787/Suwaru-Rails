@@ -1,0 +1,41 @@
+<article class="module width_full">
+	<header>
+		<h3>All Site Contents</h3>
+	</header>
+	<div class="module_content">
+		<table class="tablesorter" cellspacing="0">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Type</th>
+					<th>Published?</th>
+					<th>Created By</th>
+					<th>Options</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @site_contents.each do |site_content| %>
+					<tr>
+						<td><%= site_content.Content.Title %></td>
+						<td><%= site_content.Content.type.to_s %></td>
+						<td>
+							<% if site_content.Published %>
+								<label style="color:green">YES</label>
+							<% else %>
+								<label style="color:red">NO</label>
+							<% end %>
+						</td>
+						<td>
+							<% if !site_content.CreatedBy.nil? %>
+								<%= link_to site_content.CreatedBy.username, admin_user_path(site_content.CreatedBy) %>
+							<% else %>
+								<label style="color:red">Unknown</label>
+							<% end %>
+						</td>
+						<td>Options</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</article>

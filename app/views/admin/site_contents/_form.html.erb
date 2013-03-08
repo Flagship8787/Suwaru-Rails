@@ -2,27 +2,48 @@
 <%= render :partial => "admin/site_contents/form/assets/scripts" %>
 <section id="site_content_fields">
 	<h4><%= @content.class.to_s %> Settings</h4>
-	<div class="field">
-		<%= f.check_box :Published %>
-		<%= f.label :Published %>
-		<% if @content.Published? %>
-			<span style="color: gray ; font-style: italic">Published <%= @content.SiteContent.Published.to_s(:date_medium) %>
-		<% end %>
-	</div>
+	<% if @content.Taggable? %>
+		<div class="field">
+			<%= f.label :tag_names, "Tags" %><br />
+			<%= f.text_field :tag_names %>
+		</div>
+	<% end %>
+	<% if @content.Categorizable? %>
+		<div class="field">
+			<%= f.label :category_name, "Category" %><br />
+			<%= f.text_field :category_name %>
+		</div>
+	<% end %>
 	<%= f.fields_for :SiteContent, @content.SiteContent do |ff| %>
 		<% if @content.Commentable? %>
+			<%= ff.hidden_field :modified_by_id, :value => current_user.id.to_s %>
+			<div class="field">
+				<%= ff.check_box :Published %>
+				<%= ff.label :Published, (@content.SiteContent.Published ? "Un-Publish" : "Publish on save") %>
+				<% if @content.SiteContent.Published %>
+					<span style="color: gray ; font-style: italic">Published <%= @content.SiteContent.PublishedAt.to_s(:date_medium) %>
+				<% end %>
+			</div>
+			<div class="field">
+				<%= ff.check_box :isFeatured %>
+				<%= ff.label :isFeatured, "Featured Content (in the banner on the home page)" %>
+			</div>
 			<div class="field">
 				<%= ff.check_box :AllowComments %>
 				<%= ff.label :AllowComments, "Allow Comments" %>
 			</div>
 			<div class="field">
+				<%= ff.check_box :ApproveComments %>
+				<%= ff.label :ApproveComments, "Auto Approve Comments" %>
+			</div>
+			<div class="field">
+				<%= ff.check_box :AnonymousComments %>
+				<%= ff.label :AnonymousComments, "Allow Anonymous Comments" %>
+			</div>
+			<div class="field">
 				<%= ff.label :CommentDepth, "Max Comment Depth" %>
 				<% nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] %>
 				<%= ff.select :CommentDepth,  nums.collect{ |aNum| [aNum, aNum] } %>
-			</div>
-			<div class="field">
-				<%= ff.check_box :ApproveComments %>
-				<%= ff.label :ApproveComments, "Auto Approve Comments" %>
 			</div>
 		<% end %>
 		<% if @content.Flaggable? %>
@@ -35,17 +56,109 @@
 				<%= ff.select :CommentDepth,  nums.collect{ |aNum| [aNum, aNum] } %>
 			</div>
 		<% end %>
+		<h4>Banner Image <span class="image_size">(609X150)</span></h4>
+	    <div class="field uploadify_field banner_image_field">
+			<input type="hidden" class="upload_param" value="banner" />
+			
+			<%= ff.hidden_field :Banner_file_name, :class => "uploadify_file_name_field" %>
+			<%= ff.hidden_field :Banner_file_size, :class => "uploadify_file_size_field" %>
+			<%= ff.hidden_field :Banner_updated_at, :class => "uploadify_file_uploaded_field" %>
+
+			<div class="uploadify-field-left left_align">
+				<div class="uploadify-image-wrap">
+					<% if @content.BannerImage.nil? %>
+						<%= image_tag "no-image.jpg", :class => "uploadify-field-image" %>
+					<% else %>
+						<%= image_tag "/sc_images/" + @content.SiteContent.Banner_file_name, :class => "uploadify-field-image" %>
+					<% end %>
+				</div>
+				<%= file_field_tag :BannerImage, :class => "uploadify-field" %>
+			</div>
+			<div class="uploadify-image-info right_align">
+				<label><b>Image Attributes</b></label>
+				<p class="image_attributes">
+					<label class="left_align">Image Name</label>
+					<span class="uploadify_file_name right_align">
+						<% if @content.BannerImage.nil? %>
+							N/A
+						<% else %>
+							<%= @content.SiteContent.Banner_file_name %>	
+						<% end %>
+					</span>
+					<br class="clear_both" />
+					<label class="left_align">File Size</label>
+					<span class="uploadify_file_size right_align">
+						<% if @content.BannerImage.nil? %>
+							N/A
+						<% else %>
+							<%= @content.SiteContent.Banner_file_size %>	
+						<% end %>
+					</span>
+					<br class="clear_both" />
+					<label class="left_align">Updated</label>
+					<span class="uploadify_file_uploaded right_align">
+						<% if @content.BannerImage.nil? %>
+							N/A
+						<% else %>
+							<%= @content.SiteContent.Banner_updated_at.to_s %>	
+						<% end %>
+					</span>
+					<br class="clear_both" />
+				</p>
+	    	</div>
+	    	<br class="clear_both" />
+	  	</div>
+	  	<h4>Thumbnail <span class="image_size">(204X128)</span></h4>
+	   	<div class="field uploadify_field thumb_image_field">
+			<input type="hidden" class="upload_param" value="thumb" />
+			
+			<%= ff.hidden_field :Thumb_file_name, :class => "uploadify_file_name_field" %>
+			<%= ff.hidden_field :Thumb_file_size, :class => "uploadify_file_size_field" %>
+			<%= ff.hidden_field :Thumb_updated_at, :class => "uploadify_file_uploaded_field" %>
+
+			<div class="uploadify-field-left left_align">
+				<div class="uploadify-image-wrap">
+					<% if @content.ThumbImage.nil? %>
+						<%= image_tag "no-image.jpg", :class => "uploadify-field-image" %>
+					<% else %>
+						<%= image_tag "/sc_images/" + @content.SiteContent.Thumb_file_name, :class => "uploadify-field-image" %>
+					<% end %>
+				</div>
+				<%= file_field_tag :ThumbImage, :class => "uploadify-field" %>
+			</div>
+			<div class="uploadify-image-info right_align">
+				<label><b>Image Attributes</b></label>
+				<p class="image_attributes">
+					<label class="left_align">Image Name</label>
+					<span class="uploadify_file_name right_align">
+						<% if @content.ThumbImage.nil? %>
+							N/A
+						<% else %>
+							<%= @content.SiteContent.Thumb_file_name %>	
+						<% end %>
+					</span>
+					<br class="clear_both" />
+					<label class="left_align">File Size</label>
+					<span class="uploadify_file_size right_align">
+						<% if @content.ThumbImage.nil? %>
+							N/A
+						<% else %>
+							<%= @content.SiteContent.Thumb_file_size %>	
+						<% end %>
+					</span>
+					<br class="clear_both" />
+					<label class="left_align">Updated</label>
+					<span class="uploadify_file_uploaded right_align">
+						<% if @content.ThumbImage.nil? %>
+							N/A
+						<% else %>
+							<%= @content.SiteContent.Thumb_updated_at.to_s %>	
+						<% end %>
+					</span>
+					<br class="clear_both" />
+				</p>
+	    	</div>
+	    	<br class="clear_both" />
+	  	</div>
 	<% end %>
-	<% if @content.Taggable? %>
-		<div class="field">
-			<%= f.label :tag_names, "Tags" %><br />
-			<%= f.text_field :tag_names %>
-		</div>
-	<% end %>
-	<% if @content.Categorizable? %>
-		<div class="field">
-			<%= f.label :category_name, "Category" %><br />
-			<%= f.text_field :category_name %>
-		</div>
-	<% end %>  		
 </section>
